@@ -21,14 +21,12 @@ fonctions.o:  fonctions.c
 #prim.o: prim.c
 #	gcc -c prim.c -o prim.o $(OPT) $(SDL)
 
-
-
 clean:
 	rm -r *.o
 
 mrproper:
+	rm -r *.o
 	rm -r l
 	rm -r *~
-	rm -r *.o
 
 	

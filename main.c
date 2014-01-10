@@ -50,9 +50,8 @@ creer_fenetre(500,500);
 	serpent.n=3;
 	serpent.abs_serp=49;
 	serpent.ord_serp=13;
-//initialisation des positions du serpent
 	
-
+//initialisation des positions du serpent
 
 	int a;
 	a=cogne_mur(serpent, 50, 50);
