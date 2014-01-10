@@ -1,0 +1,157 @@
+			RÉALISATION DU SNAKE
+
+
+		PRINCIPE DU JEU
+
+Un serpent se déplace dans un tableau de H*W cases carrées de N pixels et doit manger des pois pour grandir, tout en évitant de se cogner contre les bords du tableau et contre son propre corps (auxquels cas le joueur perd la partie).
+
+		INITIALISATION
+	Commandes préprocesseur :
+définir N, taille d'une case
+définir UT : durée d'une unité de temps
+
+On lit en ligne de commande les dimensions H et W du tableau
+Initialiser la SDL (même le son)
+Ouvrir une fenêtre graphique
+int n=3 : taille initiale du serpent
+int direction=droite : entier qui indique dans quel sens le serpent doit avancer
+int partie_finie=0 : entier qui vaut 0 tant que la partie n'est pas finie, et 1 si c'est fini
+
+		PROGRAMME PRINCIPAL
+Un pois se situe à un endroit aléatoire de l'écran
+Le serpent fait n cases de longueur
+Tant que la partie n'est pas finie:
+	Le serpent avance d'une case par unité de temps UT et tout le corps du serpent passe par le même chemin qu'a pris la tête
+	On dirige le serpent avec les touches directionnelles du clavier
+	Si le serpent mange le pois
+		Faire grandir le serpent par la queue : la tête avance comme si de rien n'était mais la queue fait comme si elle s'était arrêtée pendant une UT ; n=n+1
+		Placer un nouveau pois aléatoirement dans le tableau
+Si le serpent se mange tout seul ou s'il se cogne alors la partie est finie
+
+		FONCTION QUI AVANCE LE SERPENT
+Si direction=droite
+	abs_tete=abs_tete+1
+	charger le sprite qui regarde à droite
+Si direction=gauche
+	abs_tete=abs_tete-1
+	charger le sprite qui regarde à gauche
+Si direction=haut
+	ord_tete=ord_tete-1
+	charger le sprite qui regarde en haut
+Si direction=bas
+	ord_tete=ord_tete+1
+	charger le sprite qui regarde en bas
+Actualisation des positions du serpent
+	tant qu'on n'est pas à la fin de LIST_POS, incrémenter les positions. Il n'y a que les indices à déplacer car à part la tête et la queue tous les autres segments restent à la même place : il ne devrait pas y avoir trop de problèmes aux niveaux des angles.
+		
+
+		FONCTION QUI DIRIGE LE SERPENT GRÂCE AU CLAVIER
+Si le joueur appuie sur une touche du clavier
+	switch(touche du clavier) {
+		case flèche du haut: direction=haut
+		case flèche du bas: direction=bas
+		case flèche de droite: direction=droite
+		case flèche de gauche: direction=gauche
+		case p: mettre le jeu en pause
+		case r: reprendre le jeu
+	}
+
+
+		FONCTION QUI FAIT GRANDIR LE SERPENT
+Si abscisse de la tête=abscisse du pois et ordonnée de la tête=ordonnée du pois, alors
+	enlever le pois
+	n=n+1
+	ajoute un maillon en tête dans la liste des positions du serpent
+	on décale d'un rang toutes les positions antérieures (car le corps n'avance pas, c'est juste la tête)
+
+solution alternative qui semble meilleure :
+	enlever le pois
+	n=n+1
+	le serpent avance comme si de rien n'était mais on rajoute un maillon en queue de la liste. Ainsi l'incrémentation des positions se fait toute seule grâce à la fonction qui avance le serpent et il n'y a qu'un maillon à ajouter.
+
+		FONCTION QUI PLACE UN POIS
+Tirer aléatoirement une abscisse x<W et la mettre dans le champ d'abscisse du pois
+Tirer aléatoirement une ordonnée y<H et la mettre dans le champ d'ordonnée du pois
+Mettre le sprite du pois dans la case (x,y) du tableau
+
+		FONCTION QUI TESTE SI LE SERPENT S'EST MANGÉ TOUT SEUL
+parcourir la liste des positions du serpent
+si les coordonnées de la tête y figurent, partie_finie=1
+sinon, continuer le programme
+
+		FONCTION QUI TESTE SI LE SERPENT S'EST PRIS UN MUR
+si abscisse de la tête <0 ou >=W alors partie_finie=1
+si ordonnée de la tête <0 ou >=H alors partie_finie=1
+
+		FONCTION DE FIN DE PARTIE
+si partie_finie=1, alors
+	serpent devient rouge
+	affiche "la partie est finie !"
+	si on fait les scores, ouvrir en lecture le fichier scores.txt
+	si n >= le nombre à la dernière ligne alors
+		demander le nom du joueur
+		trouver la ligne où on doit le ranger
+		écrire à cette ligne le nombre n et le nom du joueur
+		effacer la dernière ligne du fichier pour garder un nombre constant le meilleurs scores
+	fermer le fichier texte
+	attendre un appui sur la bonne touche pour relancer une partie
+
+		FONCTION QUI AFFICHE UNE CASE
+pour les pois et les segments du corps
+
+		STRUCTURES UTILES
+On a besoin de connaître où se trouvaient les différentes cases du serpent précédemment afin que le corps puisse suivre la tête. Pour ce faire on peut faire une liste des positions successives de la tête. Cette liste contiendra n éléments et devra être réactualisée toutes les UT (à chaque fois que le serpent avance d'une case).
+
+LISTE_POS : liste de n COORDONNEES : celles qui ont été occupées par la tête, donc celles où il y a un segment du corps
+
+COORDONNEES {
+	int abscisse; //abcsisse<W
+	int ordonnee; //ordonnee<H
+	};
+au final je doute que la structure coordonnées soit vraiment utile, ça ne fait qu'alourdir la syntaxe dans le code
+
+SERPENT {
+	int n; //longueur de la bête
+	COORDONNEES coord_tete;
+	LISTE_POS positions_antérieures; //cette liste ne doit pas avoir plus de n maillons
+	};
+
+POIS {
+	COORDONNEES coord_pois;
+	};
+
+		INTERFACE GRAPHIQUE
+Pour la facilité, les sprites du corps seront des carrés de la même taille qu'une case (pas de différence selon l'orientation). La queue et la tête sont des améliorations
+Un sprite pour le pois
+Un sprite pour les segments du corps
+Quatre sprites pour la tête en temps normal
+Quatre sprites pour la tête bouche ouverte (une case avant d'atteindre le pois)
+Quatre sprites pour la tête qui avale le pois (sur la case du pois et une case après)
+Quatre sprites pour la queue du serpent
+Dans le mode sans obstacle, les bords de la fenêtre suffisent pour faire les bords du tableau
+
+		FONCTION QUI OUVRE UNE FENÊTRE GRAPHIQUE
+Ouvrir une fenêtre graphique
+La remplir en blanc ou avec une image de fond (photo de pelouse par exemple)
+
+		OPTIMISATIONS
+Définir par énumération DROITE, GAUCHE, HAUT, BAS pour la direction du serpent
+Enregistrement des meilleurs scores et noms des joueurs dans un fichier texte
+Possibilité de mettre le jeu en pause (dans la fonction sur le contrôle du serpent)
+Faire des maps avec des murs à éviter
+Jouer un son lorsque le serpent mange le pois
+Jouer un son lorsque le serpent se cogne
+Possibilité de revenir de l'autre côté de l'écran quand on va dans un bord de l'écran
+La vitesse du jeu augmente avec la longueur du serpent
+Faire des sprites différents pour la tête, la queue, suivant la direction, et les segments du corps aussi (si très motivée)
+
+
+
+
+
+
+
+
+
+
+
