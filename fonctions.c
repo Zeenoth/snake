@@ -10,6 +10,8 @@
 #include <SDL/SDL_ttf.h>
 
 #include "fonctions.h"
+//#include "structures.h"
+
 
 void creer_fenetre(int largeur, int hauteur) {
 	SDL_Surface* fenetre=NULL;
@@ -32,14 +34,14 @@ void placer_pois(POIS* p, int H, int W) {
 	int x=rand()%W;
 	int y=rand()%H;
 	
-	p->abs=x;
-	p->ord=y;
+	p->abscisse=x;
+	p->ordonnee=y;
 	
 	//affiche_case(x,y) pour mettre  le sprite du pois dans la case x,y
 }
 
 int cogne_mur(SERPENT s, int H, int W) {
-	if (s.abs_serp<0 || s.ord_serp<0 || s.abs_serp>W-1 || s.ord_serp>H-1) {
+	if (s->coord.abscisse<0 || s->coord.ordonnee<0 || s->coord.abscisse>W-1 || s->coord.ordonnee>H-1) {
 		return 0;
 	}
 	else return 1;

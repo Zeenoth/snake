@@ -11,6 +11,11 @@
 
 //#include "structures.h"
 #include "fonctions.h"
+#include "liste.h"
+
+#define N 15 //taille d'une case
+#define UT 500 //base de temps en ms
+
 
 int main(int argc, char* argv[]) {
 
@@ -35,50 +40,50 @@ creer_fenetre(500,500);
 //getchar();
 
 /******************************************************************/
-//placer le pois
+/*printf("placer le pois\n");
 	POIS p;
-	p.abs=1;
-	p.ord=2;
+	p.abscisse=1;
+	p.ordonnee=2;
 	voir_pois(p);
 	struct POIS* point=NULL;
 	point=&p;
 	placer_pois(point, 50, 50);
-	voir_pois(p);
+	voir_pois(p);*/
 
-//créer le serpent
+/*printf("créer le serpent\n");
 	SERPENT serpent;
 	serpent.n=3;
 	serpent.abs_serp=49;
-	serpent.ord_serp=13;
+	serpent.ord_serp=13;*/
 	
-//initialisation des positions du serpent
+/*printf("initialisation des positions du serpent\n");
 
 	int a;
 	a=cogne_mur(serpent, 50, 50);
-	printf("%d\n", a);
-
+	printf("cogne mur %d\n", a);
+*/
 
 /******************************************************************/
-	COORDONNEES c;
+	//COORDONNEES c;
 	/*c=calloc(1, sizeof(*c));
 	if (c==NULL) {
 		printf("erreur\n");
 		exit(0);
-	}*/
-	c.abs=4;
-	c.ord=5;
+	}
+	c.abscisse=4;
+	c.ordonnee=5;
 
 	voir_coord(c);
 
 	COORDONNEES c2;
-	c2.abs=45;
-	c2.ord=4;
+	c2.abscisse=45;
+	c2.ordonnee=4;
 	voir_coord(c2);
 
 	LISTE_POS l=creer_liste();
 	l=ajouter_queue(c, l);
 	l=ajouter_queue(c2, l);
-	voir_liste(l);
+	voir_liste(l);*/
 
 	return 0;
 }
