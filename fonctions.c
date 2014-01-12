@@ -47,13 +47,13 @@ void placer_pois(POIS* p, int H, int W) {
 
 int cogne_mur(SERPENT s, int H, int W) {
 	if (s->coord.abscisse<0 || s->coord.ordonnee<0 || s->coord.abscisse>W-1 || s->coord.ordonnee>H-1) {
-		return 0;
+		return 1;
 	}
-	else return 1;
+	else return 0;
 }
 
 void visualiser_pois(POIS p) {
-	printf("abscisse %d, ordonnée %d\n", p.abscisse, p.ordonnee);
+	printf("coordonnées du pois :\nabscisse %d, ordonnée %d\n", p.abscisse, p.ordonnee);
 }
 
 SERPENT grandit(SERPENT s) {
