@@ -64,8 +64,8 @@ printf("créer le serpent\n");
 int taille_serpent = 3;
 
 SERPENT leserpent = calloc(1, sizeof(*leserpent));
-visualiser_liste(leserpent);
 leserpent = init_serpent(leserpent, taille_serpent, H, W);
+printf("serpent initialisé : \n");
 visualiser_liste(leserpent);
 
 /******************************************************************/

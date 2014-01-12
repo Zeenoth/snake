@@ -19,7 +19,7 @@ int est_vide(Liste l) {
 }
 
 int visualiser_liste(Liste l) {
-	printf("entrée dans visualiser liste\n");
+	//printf("entrée dans visualiser liste\n");
 
 	if (est_vide(l) == 1) {
 		printf("liste vide\n");
@@ -27,6 +27,7 @@ int visualiser_liste(Liste l) {
 	}
 
 	printf("taille du serpent %d\n", l->n);
+	printf("direction : %d\n", l->direction);
 	
 	Liste p;
 	p=l;
