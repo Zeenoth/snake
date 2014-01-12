@@ -25,8 +25,9 @@ SDL_Surface* creer_fenetre(int largeur, int hauteur) {
     	}   
 	SDL_WM_SetCaption("snake",NULL); //pour lui donner un nom
 
-	printf("coloriage en blanc de la fenêtre graphique\n");	
-	SDL_FillRect(fenetre, NULL, SDL_MapRGB(fenetre->format, 255, 255, 255));
+	//printf("coloriage en blanc de la fenêtre graphique\n");
+	Uint32 blanc = SDL_MapRGB(fenetre->format, 255, 255, 255);
+	SDL_FillRect(fenetre, NULL, blanc);
 
 	SDL_Flip(fenetre);
 

@@ -12,39 +12,18 @@
 #include "liste.h"
 #include "fonctions.h"
 #include "init.h"
-
-#define N 15 //taille d'une case
-#define UT 500 //base de temps en ms
+#include "global.h"
 
 
 int main(int argc, char* argv[]) {
 
-/******************************************************************/
-// contrôle des arguments passés en ligne de commande
-if (argc!=3) {
-	printf("Il faut entrer deux paramètres entiers : le nombre de lignes du tableau et le nombre de colonnes\n");
-	exit(0);
-}
-
-//nombre de cases en hauteur
-	int H=atoi(argv[1]);
-	printf("nombre de lignes : %d\n", H);
-//nombre de cases en largeur
-	int W=atoi(argv[2]);
-	printf("nombre de colonnes : %d\n", W);
-
-
-/******************************************************************/
+/*******************************************************************/
 		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
 
-
-if(SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO) == -1) {
-	printf("Impossible d'initialiser la SDL: %s.\n", SDL_GetError());
-       	SDL_Quit();
-}
-
 SDL_Surface* ecran = NULL;
-ecran = creer_fenetre(500,500);
+int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
+ecran = init_SDL(ecran, taille_fenetre);
+getchar();
 
 /******************************************************************/
 		//PLACEMENT DU POIS
@@ -52,7 +31,7 @@ ecran = creer_fenetre(500,500);
 printf("placer le pois\n");
 
 POIS lepois;
-lepois = init_pois(lepois, H, W);
+lepois = init_pois(lepois);
 visualiser_pois(lepois);
 
 /******************************************************************/
@@ -64,12 +43,18 @@ printf("créer le serpent\n");
 int taille_serpent = 3;
 
 SERPENT leserpent = calloc(1, sizeof(*leserpent));
-leserpent = init_serpent(leserpent, taille_serpent, H, W);
+leserpent = init_serpent(leserpent, taille_serpent);
 printf("serpent initialisé : \n");
 visualiser_liste(leserpent);
 
-/******************************************************************/
-	
+printf("\nFIN DE L'INITIALISATION\n\n");
 
+/******************************************************************/
+		//BOUCLE DU PROGRAMME PRINCIPAL
+
+
+
+	
+/******************************************************************/
 	return 0;
 }

@@ -10,6 +10,7 @@
 
 #include "liste.h"
 #include "init.h"
+#include "global.h"
 
 
 //ouverture d'une fenêtre graphique blanche

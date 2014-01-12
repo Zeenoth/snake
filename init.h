@@ -14,12 +14,16 @@
 
 #include "liste.h"
 #include "fonctions.h"
+#include "global.h"
+
+//fonction qui initialise la SDL et crée la fenêtre du jeu
+SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre);
 
 //fonction qui place le tout premier pois
-POIS init_pois(POIS p, int hauteur, int largeur);
+POIS init_pois(POIS p);
 
 //fonction qui initialise le serpent : trois cases vers la gauche en partant du centre de l'écran
-SERPENT init_serpent(SERPENT le_serpent, int taille_serpent, int hauteur, int largeur);
+SERPENT init_serpent(SERPENT le_serpent, int taille_serpent);
 
 
 

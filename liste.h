@@ -2,6 +2,7 @@
 #define _LISTE_H_
 
 #include <time.h>
+#include "global.h"
 
 //la structure de base : les coordonnées
 typedef struct {
@@ -37,12 +38,6 @@ Liste ajout_tete(Maillon c, Liste l);
 Liste supprimer_tete(Liste l) ;
 
 Liste supprime_tout(Liste l);
-
-
-
-
-
-
 
 
 #endif

@@ -43,7 +43,7 @@ int visualiser_liste(Liste l) {
 }
 
 Liste ajout_tete(Maillon c, Liste l) {
-	printf("\nentrée dans la fonction ajout_tete\n");
+	//printf("\nentrée dans la fonction ajout_tete\n");
 	if (est_vide(l)==1) {
 		
 		l=calloc(1,sizeof(*l));
@@ -66,7 +66,7 @@ Liste ajout_tete(Maillon c, Liste l) {
 		return NULL;
 	}
 
-	printf("recopie des champs\n");
+	//printf("recopie des champs\n");
 	
 	p->n = (l->n) + 1;
 	
