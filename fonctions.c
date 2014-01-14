@@ -93,6 +93,37 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s) {
 	//il s'agit de parcourir le serpent et d'afficher chaque segment de son corps
 
 	Liste p = s;
+	
+	SDL_Surface* tete = NULL;
+	SDL_Rect position_segment;
+	position_segment.x = (p->coord.abscisse) * SIZE;
+	position_segment.y = (p->coord.ordonnee) * SIZE;
+
+	switch(s->direction) {
+		case droite: 
+			tete = IMG_Load("sprites/droite.png");
+			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
+			break;
+
+		case gauche: 
+			tete = IMG_Load("sprites/gauche.png");
+			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
+			break;
+
+		case bas: 
+			tete = IMG_Load("sprites/bas.png");
+			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
+			break;
+
+		case haut: 
+			tete = IMG_Load("sprites/haut.png");
+			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
+			break;
+	}
+
+	p = p->suiv;
+
+	
 
 	while (est_vide(p)==0) {
 		SDL_Rect position_segment;

@@ -59,7 +59,7 @@ printf("\nFIN DE L'INITIALISATION\n\n");
 
 //chargement des sprites
 SDL_Surface* pomme = NULL;
-pomme = IMG_Load("sprites/apple32x32.jpg");
+pomme = IMG_Load("sprites/apple60.jpg");
 
 SDL_Surface* tete = NULL;
 tete = IMG_Load("sprites/corps.png");
@@ -72,6 +72,12 @@ leserpent = avance(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
+leserpent->direction = gauche;
+leserpent = avance(leserpent);
+rafraichir(ecran, tete, leserpent, pomme, lepois);
+getchar();
+
+leserpent->direction = bas;
 leserpent = avance(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
