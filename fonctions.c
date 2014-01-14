@@ -89,6 +89,124 @@ SERPENT grandit(SERPENT s) {
 	return s;
 }
 
+void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s) {
+	//il s'agit de parcourir le serpent et d'afficher chaque segment de son corps
+
+	Liste p = s;
+
+	while (est_vide(p)==0) {
+		SDL_Rect position_segment;
+		position_segment.x = (p->coord.abscisse) * SIZE;
+		position_segment.y = (p->coord.ordonnee) * SIZE;
+		SDL_BlitSurface(sprite, NULL, ecran, &position_segment);
+		p=p->suiv;
+	}
+	
+	SDL_Flip(ecran);
+}
+
+void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p) {
+
+	SDL_Rect position;
+	position.x = (p.abscisse) * SIZE;
+	position.y = (p.ordonnee) * SIZE;
+	SDL_BlitSurface(sprite, NULL, ecran, &position);
+	
+	SDL_Flip(ecran);
+}
+
+int mange_pois(SERPENT s, POIS p) {
+	int n = 0;
+
+	if (s->coord.abscisse == p.abscisse && s->coord.ordonnee == p.ordonnee) {
+		n = 1;
+	}
+
+	return n;
+}
+
+int mange_serpent(SERPENT s) {
+	int n = 0;
+	Liste p = s->suiv;
+
+	while (est_vide(p) == 0) {
+		if (p->coord.abscisse == s->coord.abscisse && p->coord.ordonnee == s->coord.ordonnee) {
+			n = 1;
+			return n;
+		}
+		p = p->suiv;
+	}
+
+	return n;
+}
+
+SERPENT avance(SERPENT s) {
+	printf("\nentrée dans avance\n");
+	
+	//la tête va avancer d'une case dans la direction
+	//chaque segment va prendre les coordonnées de celui qui le précède
+	//il faut parcourir la liste par la fin
+
+	COORDONNEES tampon1;
+	tampon1.abscisse = s->coord.abscisse;
+	tampon1.ordonnee = s->coord.ordonnee;
+
+	Liste p = s->suiv;
+
+	//pour connaître les coordonnées de la nouvelle tête, il faut savoir dans quelle direction le serpent avance
+	switch(s->direction) {
+		case droite:
+			s->coord.abscisse = s->coord.abscisse +1;
+			s->coord.ordonnee = s->coord.ordonnee;
+			break;
+		case gauche:
+			s->coord.abscisse = s->coord.abscisse -1;
+			s->coord.ordonnee = s->coord.ordonnee;
+			break;
+		case haut:
+			s->coord.abscisse = s->coord.abscisse;
+			s->coord.ordonnee = s->coord.ordonnee -1;
+			break;
+		case bas:
+			s->coord.abscisse = s->coord.abscisse;
+			s->coord.ordonnee = s->coord.ordonnee +1;
+			break;
+	}
+	//ici la tete a déjà avancé
+
+	visualiser_liste(s);
+	//JUSQU'ICI ON EST BON
+
+
+
+
+	
+
+/*
+	while (est_vide(p->suiv->suiv) == 0) {
+		p = p->suiv;
+	}
+	printf("le dernier maillon %d\n", p->coord.abscisse);
+	p->suiv = NULL;
+*/
+	return s;
+}
+
+void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p) {
+	//On efface l'écran (ici fond blanc) :
+	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+     
+	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */
+	affiche_pois(ecran, pomme, p);
+	affiche_serpent(ecran, tete, s);
+ 
+	/* On met à jour l'affichage : */
+	SDL_Flip(ecran);
+}
+
+
+
+
 
 
 

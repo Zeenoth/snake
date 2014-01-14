@@ -26,7 +26,7 @@ int visualiser_liste(Liste l) {
 		return 2;
 	}
 
-	printf("taille du serpent %d\n", l->n);
+	printf("\ntaille du serpent %d\n", l->n);
 	printf("direction : %d\n", l->direction);
 	
 	Liste p;

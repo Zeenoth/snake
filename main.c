@@ -26,26 +26,26 @@ ecran = init_SDL(ecran, taille_fenetre);
 getchar();
 
 /******************************************************************/
-		//PLACEMENT DU POIS
-
-printf("placer le pois\n");
-
-POIS lepois;
-lepois = init_pois(lepois);
-visualiser_pois(lepois);
-
-/******************************************************************/
 		//CRÉATION DU SERPENT
 
-printf("créer le serpent\n");
+printf("\ncréer le serpent\n");
 
 //taille initiale du serpent
-int taille_serpent = 3;
+int taille_serpent = 4;
 
 SERPENT leserpent = calloc(1, sizeof(*leserpent));
 leserpent = init_serpent(leserpent, taille_serpent);
 printf("serpent initialisé : \n");
 visualiser_liste(leserpent);
+
+/******************************************************************/
+		//PLACEMENT DU POIS
+
+printf("\nplacer le pois\n");
+
+POIS lepois;
+lepois = init_pois(lepois, leserpent);
+visualiser_pois(lepois);
 
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
@@ -60,24 +60,20 @@ printf("\nFIN DE L'INITIALISATION\n\n");
 
 //chargement des sprites
 SDL_Surface* pomme = NULL;
-SDL_Rect positionpomme;
 pomme = IMG_Load("sprites/apple32x32.jpg");
-positionpomme.x = (lepois.abscisse*SIZE); //le sprite n'est pas encore bien centré sur la case !
-positionpomme.y = (lepois.ordonnee*SIZE);
-SDL_BlitSurface(pomme, NULL, ecran, &positionpomme);
-SDL_Flip(ecran);
-getchar();
 
 SDL_Surface* tete = NULL;
-SDL_Rect positiontete;
-tete = IMG_Load("sprites/corps70x65.jpg");
-positiontete.x = (leserpent->coord.abscisse) * SIZE;
-positiontete.y = (leserpent->coord.ordonnee) * SIZE;
-SDL_BlitSurface(tete, NULL, ecran, &positiontete);
-SDL_Flip(ecran);
+tete = IMG_Load("sprites/corps.png");
+
+rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
-SDL_Surface* corps = NULL;
+
+leserpent->direction = droite;
+leserpent = avance(leserpent);
+visualiser_liste(leserpent);
+rafraichir(ecran, tete, leserpent, pomme, lepois);
+getchar();
 
 /*Tant que la partie n'est pas finie :
  *	le serpent avance d'une case par unité de temps

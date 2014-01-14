@@ -19,8 +19,8 @@
 //fonction qui initialise la SDL et crée la fenêtre du jeu
 SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre);
 
-//fonction qui place le tout premier pois
-POIS init_pois(POIS p);
+//fonction qui place le tout premier pois en veillant à ce qu'il ne coïncide pas avec le serpent
+POIS init_pois(POIS p, SERPENT s);
 
 //fonction qui initialise le serpent : trois cases vers la gauche en partant du centre de l'écran
 SERPENT init_serpent(SERPENT le_serpent, int taille_serpent);

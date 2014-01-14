@@ -16,12 +16,20 @@ SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre) {
 	return ecran;
 }
 
-POIS init_pois(POIS p) {
+POIS init_pois(POIS p, SERPENT s) {
 	
 	srand(time(NULL)); //initialisation de la fonction random
 	
-	p.abscisse=rand()%SIZE;
-	p.ordonnee=rand()%SIZE;
+	p.abscisse=rand()%N;
+	p.ordonnee=rand()%N;
+
+	Liste l = s;
+	while (est_vide(l) == 0) {
+		if (p.abscisse == l->coord.abscisse && p.ordonnee == l->coord.ordonnee) {
+			init_pois(p, s);
+		}
+		l = l->suiv;
+	}		
 
 	return p;
 }
@@ -35,8 +43,8 @@ SERPENT init_serpent(SERPENT le_serpent, int taille_serpent) {
 
 	le_serpent->n = 1;
 	le_serpent->direction = droite; //en début de partie il commence vers la droite
-	le_serpent->coord.abscisse = floor(SIZE/2); //il apparaît au centre de l'écran
-	le_serpent->coord.ordonnee = floor(SIZE/2);
+	le_serpent->coord.abscisse = floor(N/2); //il apparaît au centre de l'écran
+	le_serpent->coord.ordonnee = floor(N/2);
 
 	while (le_serpent->n < taille_serpent) {
 		le_serpent = grandit(le_serpent);
