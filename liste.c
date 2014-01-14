@@ -47,13 +47,9 @@ Liste ajout_tete(Maillon c, Liste l) {
 	if (est_vide(l)==1) {
 		
 		l=calloc(1,sizeof(*l));
-	
 		l->n = (l->n) + 1; //le serpent a grandi d'un élément
-	
 		l->coord.abscisse = c.coord.abscisse;
-	
 		l->coord.ordonnee = c.coord.ordonnee;
-	
 		l->suiv=NULL;
 
 		return l;
@@ -108,7 +104,31 @@ Liste supprime_tout(Liste l) {
 
 }
 
+Liste ajout_queue(Maillon c, Liste l) {
 
+	Liste copie=l;
+	if (!l) {
+		return ajout_tete(c,NULL);
+	}
+	while (l->suiv!=NULL) {
+		l=l->suiv;
+	}
+	l->suiv=ajout_tete(c,NULL);
+	return copie;
+}
 
+Liste copie(Liste l) {
+	Liste p=l;
+	Liste copie=creer_liste();
+	Maillon m;
+	while (est_vide(p) == 0) {
+		m.coord.abscisse = p->coord.abscisse;
+		m.coord.ordonnee = p->coord.ordonnee;
+		copie=ajout_queue(m, copie);
+		p=p->suiv;
+	}
+	copie->n = l->n;
+	return copie;
+}
 
 

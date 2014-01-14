@@ -23,7 +23,6 @@ int main(int argc, char* argv[]) {
 SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
 ecran = init_SDL(ecran, taille_fenetre);
-getchar();
 
 /******************************************************************/
 		//CRÉATION DU SERPENT
@@ -68,10 +67,16 @@ tete = IMG_Load("sprites/corps.png");
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
-
-leserpent->direction = droite;
+leserpent->direction = haut;
 leserpent = avance(leserpent);
-visualiser_liste(leserpent);
+rafraichir(ecran, tete, leserpent, pomme, lepois);
+getchar();
+
+leserpent = avance(leserpent);
+rafraichir(ecran, tete, leserpent, pomme, lepois);
+getchar();
+
+leserpent = avance(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 

@@ -140,18 +140,13 @@ int mange_serpent(SERPENT s) {
 	return n;
 }
 
-SERPENT avance(SERPENT s) {
-	printf("\nentrée dans avance\n");
-	
+SERPENT avance(SERPENT s) {	
 	//la tête va avancer d'une case dans la direction
 	//chaque segment va prendre les coordonnées de celui qui le précède
-	//il faut parcourir la liste par la fin
 
-	COORDONNEES tampon1;
-	tampon1.abscisse = s->coord.abscisse;
-	tampon1.ordonnee = s->coord.ordonnee;
-
-	Liste p = s->suiv;
+	Liste cop = copie(s);
+	//printf("\n la liste copiée est :\n");
+	//visualiser_liste(cop);
 
 	//pour connaître les coordonnées de la nouvelle tête, il faut savoir dans quelle direction le serpent avance
 	switch(s->direction) {
@@ -172,23 +167,21 @@ SERPENT avance(SERPENT s) {
 			s->coord.ordonnee = s->coord.ordonnee +1;
 			break;
 	}
-	//ici la tete a déjà avancé
 
-	visualiser_liste(s);
-	//JUSQU'ICI ON EST BON
+	//printf("\nla tete a avancé mais le corps pas encore");
+	//visualiser_liste(s);
 
+	Liste p = s->suiv;
+	Liste c = cop;
 
+	while (est_vide(p) == 0) {
+		p->coord.abscisse = c->coord.abscisse;
+		p->coord.ordonnee = c->coord.ordonnee;
 
-
-	
-
-/*
-	while (est_vide(p->suiv->suiv) == 0) {
 		p = p->suiv;
+		c = c->suiv;
 	}
-	printf("le dernier maillon %d\n", p->coord.abscisse);
-	p->suiv = NULL;
-*/
+
 	return s;
 }
 

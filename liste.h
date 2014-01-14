@@ -39,6 +39,9 @@ Liste supprimer_tete(Liste l) ;
 
 Liste supprime_tout(Liste l);
 
+Liste ajout_queue(Maillon c, Liste l);
+
+Liste copie(Liste l);
 
 #endif
 
