@@ -50,6 +50,7 @@ Liste ajout_tete(Maillon c, Liste l) {
 		l->n = (l->n) + 1; //le serpent a grandi d'un élément
 		l->coord.abscisse = c.coord.abscisse;
 		l->coord.ordonnee = c.coord.ordonnee;
+		l->direction = c.direction;
 		l->suiv=NULL;
 
 		return l;
@@ -69,6 +70,8 @@ Liste ajout_tete(Maillon c, Liste l) {
 	p->coord.abscisse = c.coord.abscisse;
 	
 	p->coord.ordonnee = c.coord.ordonnee;
+
+	p->direction = c.direction;
 	
 	p->suiv=l;
 	

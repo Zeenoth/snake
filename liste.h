@@ -13,9 +13,9 @@ typedef struct {
 //la structure du serpent
 typedef enum {droite, gauche, haut, bas} DIRECTION;
 typedef struct cellule {
-	int n; //la taille du serpent
-	COORDONNEES coord; //la position de la tête
-	DIRECTION direction; //la direction dans laquelle il avance
+	int n;			//la taille du serpent
+	COORDONNEES coord;	//la position de la tête
+	DIRECTION direction;	//la direction dans laquelle il avance
 	struct cellule* suiv;
 } Maillon, *Liste;
 typedef Liste SERPENT;

@@ -60,6 +60,7 @@ SERPENT grandit(SERPENT s) {
 	//création du maillon qui sera la tête
 	Maillon tete;
 	tete.n = (s->n)+1; //mise à jour de la taille du serpent
+	tete.direction = s->direction;
 
 	//pour connaître les coordonnées de la nouvelle tête, il faut savoir dans quelle direction le serpent avance
 	switch(s->direction) {
@@ -80,9 +81,6 @@ SERPENT grandit(SERPENT s) {
 			tete.coord.ordonnee = s->coord.ordonnee +1;
 			break;
 	}
-
-	//le serpent avance dans la même direction qu'avant donc
-	tete.direction = s->direction;
 
 	s = ajout_tete(tete,s);
 

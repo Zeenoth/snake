@@ -77,8 +77,9 @@ leserpent = avance(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
-leserpent->direction = bas;
-leserpent = avance(leserpent);
+leserpent->direction = gauche;
+leserpent = grandit(leserpent);
+visualiser_liste(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
