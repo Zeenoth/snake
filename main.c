@@ -83,6 +83,7 @@ visualiser_liste(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
 
+leserpent->direction = bas;
 leserpent = avance(leserpent);
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 getchar();
