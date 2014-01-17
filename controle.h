@@ -18,6 +18,12 @@
 #include "global.h"
 
 
+typedef struct {
+	int partie_finie;
+	int score;
+} VARIABLES;
+
+VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables);
 
 
 

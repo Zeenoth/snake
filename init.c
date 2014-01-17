@@ -18,10 +18,8 @@ SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre) {
 
 POIS init_pois(POIS p, SERPENT s) {
 	
-	srand(time(NULL)); //initialisation de la fonction random
-	
-	p.abscisse=rand()%N;
-	p.ordonnee=rand()%N;
+	p.abscisse=rand()%(N-1);
+	p.ordonnee=rand()%(N-1);
 
 	Liste l = s;
 	while (est_vide(l) == 0) {

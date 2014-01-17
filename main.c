@@ -13,6 +13,7 @@
 #include "fonctions.h"
 #include "init.h"
 #include "global.h"
+#include "controle.h"
 
 
 int main(int argc, char* argv[]) {
@@ -41,7 +42,7 @@ visualiser_liste(leserpent);
 		//PLACEMENT DU POIS
 
 printf("\nplacer le pois\n");
-
+srand(time(NULL)); //initialisation de la fonction random
 POIS lepois;
 lepois = init_pois(lepois, leserpent);
 visualiser_pois(lepois);
@@ -49,8 +50,9 @@ visualiser_pois(lepois);
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
-int partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
-int score = 0; //compte le nombre de pois mangés par le serpent
+VARIABLES var;
+var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
+var.score = 0; //compte le nombre de pois mangés par le serpent
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -65,28 +67,6 @@ SDL_Surface* tete = NULL;
 tete = IMG_Load("sprites/corps.png");
 
 rafraichir(ecran, tete, leserpent, pomme, lepois);
-getchar();
-
-leserpent->direction = haut;
-leserpent = avance(leserpent);
-rafraichir(ecran, tete, leserpent, pomme, lepois);
-getchar();
-
-leserpent->direction = gauche;
-leserpent = avance(leserpent);
-rafraichir(ecran, tete, leserpent, pomme, lepois);
-getchar();
-
-leserpent->direction = gauche;
-leserpent = grandit(leserpent);
-visualiser_liste(leserpent);
-rafraichir(ecran, tete, leserpent, pomme, lepois);
-getchar();
-
-leserpent->direction = bas;
-leserpent = avance(leserpent);
-rafraichir(ecran, tete, leserpent, pomme, lepois);
-getchar();
 
 /*Tant que la partie n'est pas finie :
  *	le serpent avance d'une case par unité de temps
@@ -102,6 +82,9 @@ getchar();
  * 	s'il fait partie des dix meilleurs, demander le nom du joueur et l'ajouter dans le tableau
  * 	afficher le tableau des scores
  */
+
+var = controle(ecran, leserpent, lepois, tete, pomme, var);
+printf("ton score : %d\n", var.score);
 	
 /******************************************************************/
 	return 0;

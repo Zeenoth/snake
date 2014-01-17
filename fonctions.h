@@ -37,7 +37,7 @@ void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p);
 //vérifie si la tête du serpent est sur la case du pois : renvoie 1 si le pois est atteint, 0 sinon
 int mange_pois(SERPENT s, POIS p);
 
-//vérifie si le serpent se mange tout seul : renvoie 1 si oui et non sinon
+//vérifie si le serpent se mange tout seul : renvoie 1 si oui et 0 sinon
 int mange_serpent(SERPENT s);
 
 //fait avancer le serpent d'une position (met à jour les coordonnées)

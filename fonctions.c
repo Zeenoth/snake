@@ -18,7 +18,7 @@
 SDL_Surface* creer_fenetre(int largeur, int hauteur) {
 	SDL_Surface* fenetre=NULL;
 
-	fenetre = SDL_SetVideoMode(largeur,hauteur, 16, SDL_HWSURFACE );
+	fenetre = SDL_SetVideoMode(largeur,hauteur, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	if( fenetre == NULL ) {
 	        printf( "Can't set video mode: %s\n", SDL_GetError( ) );
 		exit(0);
@@ -145,13 +145,15 @@ void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p) {
 }
 
 int mange_pois(SERPENT s, POIS p) {
-	int n = 0;
+	printf("\nentrée dans la fonction mange pois\n");
 
 	if (s->coord.abscisse == p.abscisse && s->coord.ordonnee == p.ordonnee) {
-		n = 1;
+		printf("mange pois = 1\n");
+		return 1;
 	}
 
-	return n;
+	printf("mange pois = 0\n");
+	return 0;
 }
 
 int mange_serpent(SERPENT s) {
