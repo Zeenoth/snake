@@ -13,9 +13,6 @@
 #include "controle.h"
 
 
-
-
-
 //fonction qui charge le fichier en mémoire
 SCORE* charge_scores(FILE* fichier, SCORE* tab);
 
@@ -26,7 +23,7 @@ int affiche_scores(SCORE* t);
 int merite(int s, SCORE* t);
 
 //inscrit le score du joueur dans le fichier
-void ecrit_score(int s, FILE* fichier);
+void ecrit_score(int classement, int points, FILE* fichier, SCORE* tableau);
 
 
 

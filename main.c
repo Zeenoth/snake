@@ -95,7 +95,7 @@ rafraichir(ecran, tete, leserpent, pomme, lepois);
 var = controle(ecran, leserpent, lepois, tete, pomme, var);
 if (var.partie_finie == 1) {
 	printf("\nTon score : %d\n", var.score);
-	feuille_scores = fopen("score.txt", "rw");
+	feuille_scores = fopen("score.txt", "r+"); //ouverture du fichier en lecture et écriture
 	if (feuille_scores == NULL) {
 		printf("Impossible d'ouvrir le fichier des scores\n");
 		exit(0);
@@ -105,7 +105,11 @@ if (var.partie_finie == 1) {
 //printf("ton score : %d\n", var.score);
 tableau = charge_scores(feuille_scores, tableau);
 affiche_scores(tableau);
-printf("\nta position : %d\n", merite(var.score, tableau));
+int classement = merite(var.score, tableau);
+printf("\nta position : %d\n", classement);
+if (classement < 11) {
+	ecrit_score(classement, var.score, feuille_scores, tableau);
+}
 	
 /******************************************************************/
 	return 0;

@@ -63,7 +63,6 @@ SCORE* init_scores() {
 		t[i].resultat = 0;
 		strcpy(t[i].player, "vide");
 		i++;
-		//t[i].player = "vide";
 	}
 	for (i = 0 ; i < 10 ; i++) {
 		printf("%d\n", t[i].resultat);
