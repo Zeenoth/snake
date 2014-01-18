@@ -33,3 +33,37 @@ int affiche_scores(SCORE* t) {
 	}
 	return 0;
 }
+
+int merite(int s, SCORE* t) {
+	int i = 10; //le tableau des scores fait 10 cases, on le parcourt depuis la fin
+	printf("dernier %d\n", t[i].resultat);
+	printf("toi %d\n", s);
+
+	if (s < t[i].resultat) { //cas où le joueur ne fait pas partie des meilleurs
+		return 20;
+	}
+	
+	if (s == t[i].resultat) { //cas où il est dernier
+		return i;
+	}
+
+	else {
+		i--;
+		while (i >= t[i].resultat) {
+			i--;
+		}
+	}
+	
+	return i+2;
+}
+
+void ecrit_score(int s, FILE* fichier) {
+
+
+	
+}
+
+
+
+
+

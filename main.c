@@ -22,6 +22,10 @@ int main(int argc, char* argv[]) {
 /*******************************************************************/
 		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
 
+SIZE = 70;
+N = 10;
+UT = 700;
+
 SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
 ecran = init_SDL(ecran, taille_fenetre);
@@ -51,11 +55,13 @@ visualiser_pois(lepois);
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
+
+
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
 FILE* feuille_scores = NULL;
-SCORE* tableau = calloc(10,sizeof(SCORE));
+SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -88,6 +94,7 @@ rafraichir(ecran, tete, leserpent, pomme, lepois);
 
 var = controle(ecran, leserpent, lepois, tete, pomme, var);
 if (var.partie_finie == 1) {
+	printf("\nTon score : %d\n", var.score);
 	feuille_scores = fopen("score.txt", "rw");
 	if (feuille_scores == NULL) {
 		printf("Impossible d'ouvrir le fichier des scores\n");
@@ -97,8 +104,8 @@ if (var.partie_finie == 1) {
 	
 //printf("ton score : %d\n", var.score);
 tableau = charge_scores(feuille_scores, tableau);
-printf("ici\n");
 affiche_scores(tableau);
+printf("\nta position : %d\n", merite(var.score, tableau));
 	
 /******************************************************************/
 	return 0;

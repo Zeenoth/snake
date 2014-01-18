@@ -2,7 +2,7 @@
 
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables) {
 
-	printf("\nentrée dans la fonction controle\n");
+	//printf("\nentrée dans la fonction controle\n");
 	
 	int continuer = 1;
 	SDL_Event event;
@@ -70,7 +70,7 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 		//on regarde s'il s'est pris un mur
 		cogne = cogne_mur(leserpent, N, N);
 		if (cogne == 1) {
-			printf("\nperdu !\n");
+			//printf("\nperdu !\n");
 			variables.partie_finie = 1;
 			continuer = 0;
 			return variables;
@@ -79,7 +79,7 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 		//on regarde s'il se mord la queue
 		queue = mange_serpent(leserpent);
 		if (queue == 1) {
-			printf("\nperdu !\n");
+			//printf("\nperdu !\n");
 			variables.partie_finie = 1;
 			continuer = 0;
 			return variables;

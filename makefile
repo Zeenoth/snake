@@ -8,7 +8,7 @@ All: main.o liste.o fonctions.o init.o controle.o fichier.o
 main.o: main.c
 	gcc -c main.c -o main.o $(OPT) $(SDL)
 
-fichier.o:fichier.c
+fichier.o: fichier.c
 	gcc -c fichier.c -o fichier.o $(OPT) $(SDL)
 
 init.o: init.c

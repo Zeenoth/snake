@@ -1,10 +1,15 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
+//la structure des scores
+typedef struct {
+	int position;
+	char player[25];
+	int resultat;
+} SCORE;
 
-#define SIZE 70 //taille d'une case
-#define N 10 //nombre de cases du tableau
-#define UT 700 //base de temps en ms
-
+int SIZE;	//taille d'une case
+int N;		//nombre de cases du tableau
+int UT;		//base de temps en ms
 
 #endif

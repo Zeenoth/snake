@@ -13,12 +13,7 @@
 #include "controle.h"
 
 
-//la structure des scores
-typedef struct {
-	int position;
-	char player[25];
-	int resultat;
-} SCORE;
+
 
 
 //fonction qui charge le fichier en mémoire
@@ -26,6 +21,12 @@ SCORE* charge_scores(FILE* fichier, SCORE* tab);
 
 //affiche dans le terminal les meilleurs scores
 int affiche_scores(SCORE* t);
+
+//regarde si le joueur fait partie des meilleurs ; renvoie le classement du joueur
+int merite(int s, SCORE* t);
+
+//inscrit le score du joueur dans le fichier
+void ecrit_score(int s, FILE* fichier);
 
 
 

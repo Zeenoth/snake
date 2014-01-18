@@ -52,3 +52,21 @@ SERPENT init_serpent(SERPENT le_serpent, int taille_serpent) {
 
 	return le_serpent;
 }
+
+SCORE* init_scores() {
+	printf("entrée dans init_scores\n");
+	
+	SCORE* t = calloc(10,sizeof(SCORE));
+
+	int i = 0;
+	while (i < 10) {
+		t[i].resultat = 0;
+		strcpy(t[i].player, "vide");
+		i++;
+		//t[i].player = "vide";
+	}
+	for (i = 0 ; i < 10 ; i++) {
+		printf("%d\n", t[i].resultat);
+	}
+	return t;
+}
