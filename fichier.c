@@ -3,7 +3,13 @@
 
 SCORE* charge_scores(FILE* fichier, SCORE* tab) {
 	printf("\nChargement du tableau des scores\n");
-	
+
+	fichier = fopen("score.txt", "r+"); //ouverture du fichier en lecture et écriture
+	if (fichier == NULL) {
+		printf("Impossible d'ouvrir le fichier des scores\n");
+		exit(0);
+	}
+		
 	int i = 0; //entier qui compte les positions dans les scores
 	char* mot = NULL;
 	char ligne[512];
@@ -28,6 +34,9 @@ SCORE* charge_scores(FILE* fichier, SCORE* tab) {
 
 int affiche_scores(SCORE* t) {
 	int i;
+	FILE* fichier = NULL;
+	
+	t = charge_scores(fichier, t);
 
 	printf("\nPalmarès :\n");
 	for (i = 0 ; i<10 ; i++) {

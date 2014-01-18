@@ -18,12 +18,16 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 		switch(event.type) {
 			case SDL_QUIT:
 				continuer = 0;
+				variables.partie_finie = 0;
+				return variables;
 				break;
 
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym) {
 					case SDLK_ESCAPE:
 						continuer = 0;
+						variables.partie_finie = 0;
+						return variables;
 						break;
 					
 					case SDLK_UP:
