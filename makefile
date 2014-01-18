@@ -2,11 +2,14 @@ OPT= -Wall -pipe
 SDL= -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_draw
 
 
-All: main.o liste.o fonctions.o init.o controle.o
-	gcc main.o liste.o fonctions.o init.o controle.o -o l $(OPT) $(SDL)
+All: main.o liste.o fonctions.o init.o controle.o fichier.o
+	gcc main.o liste.o fonctions.o init.o controle.o fichier.o -o l $(OPT) $(SDL)
 
 main.o: main.c
 	gcc -c main.c -o main.o $(OPT) $(SDL)
+
+fichier.o:fichier.c
+	gcc -c fichier.c -o fichier.o $(OPT) $(SDL)
 
 init.o: init.c
 	gcc -c init.c -o init.o $(OPT) $(SDL)

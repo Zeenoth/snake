@@ -16,7 +16,7 @@
 #include "fonctions.h"
 #include "init.h"
 #include "global.h"
-
+#include "fichier.h"
 
 typedef struct {
 	int partie_finie;

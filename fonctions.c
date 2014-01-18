@@ -145,30 +145,29 @@ void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p) {
 }
 
 int mange_pois(SERPENT s, POIS p) {
-	printf("\nentrée dans la fonction mange pois\n");
+	//printf("\nentrée dans la fonction mange pois\n");
 
 	if (s->coord.abscisse == p.abscisse && s->coord.ordonnee == p.ordonnee) {
-		printf("mange pois = 1\n");
+		//printf("mange pois = 1\n");
 		return 1;
 	}
 
-	printf("mange pois = 0\n");
+	//printf("mange pois = 0\n");
 	return 0;
 }
 
 int mange_serpent(SERPENT s) {
-	int n = 0;
+	
 	Liste p = s->suiv;
 
 	while (est_vide(p) == 0) {
 		if (p->coord.abscisse == s->coord.abscisse && p->coord.ordonnee == s->coord.ordonnee) {
-			n = 1;
-			return n;
+			return 1;
 		}
 		p = p->suiv;
 	}
 
-	return n;
+	return 0;
 }
 
 SERPENT avance(SERPENT s) {	

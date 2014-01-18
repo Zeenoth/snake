@@ -14,6 +14,7 @@
 #include "init.h"
 #include "global.h"
 #include "controle.h"
+#include "fichier.h"
 
 
 int main(int argc, char* argv[]) {
@@ -53,6 +54,8 @@ visualiser_pois(lepois);
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
+FILE* feuille_scores = NULL;
+SCORE* tableau = calloc(10,sizeof(SCORE));
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -84,7 +87,18 @@ rafraichir(ecran, tete, leserpent, pomme, lepois);
  */
 
 var = controle(ecran, leserpent, lepois, tete, pomme, var);
-printf("ton score : %d\n", var.score);
+if (var.partie_finie == 1) {
+	feuille_scores = fopen("score.txt", "rw");
+	if (feuille_scores == NULL) {
+		printf("Impossible d'ouvrir le fichier des scores\n");
+		exit(0);
+	}
+}
+	
+//printf("ton score : %d\n", var.score);
+tableau = charge_scores(feuille_scores, tableau);
+printf("ici\n");
+affiche_scores(tableau);
 	
 /******************************************************************/
 	return 0;

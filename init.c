@@ -22,9 +22,10 @@ POIS init_pois(POIS p, SERPENT s) {
 	p.ordonnee=rand()%(N-1);
 
 	Liste l = s;
+
 	while (est_vide(l) == 0) {
 		if (p.abscisse == l->coord.abscisse && p.ordonnee == l->coord.ordonnee) {
-			init_pois(p, s);
+			p = init_pois(p, s);
 		}
 		l = l->suiv;
 	}		
