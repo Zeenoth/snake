@@ -2,7 +2,7 @@
 
 
 SCORE* charge_scores(FILE* fichier, SCORE* tab) {
-	printf("\nChargement du tableau des scores\n");
+	//printf("\nChargement du tableau des scores\n");
 
 	fichier = fopen("score.txt", "r+"); //ouverture du fichier en lecture et écriture
 	if (fichier == NULL) {

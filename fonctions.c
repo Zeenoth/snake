@@ -171,7 +171,7 @@ int mange_serpent(SERPENT s) {
 }
 
 SERPENT avance(SERPENT s) {	
-	//la tête va avancer d'une case dans la direction
+	//la tête va avancer d'une case dans la bonne direction
 	//chaque segment va prendre les coordonnées de celui qui le précède
 
 	Liste cop = copie(s);

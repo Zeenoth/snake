@@ -7,14 +7,17 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 	int continuer = 1;
 	SDL_Event event;
 	int mange; //s"il mange le pois
+	int flag = 0;
 	int cogne; //s'il se cogne contre un mur
 	int queue; //s'il se mord la queue
 
 	//BOUCLE DE LA GESTION DES ÉVÈNEMENTS
 	while (continuer) {
+		printf("%d\n", flag);
 
 		//on attend que le joueur appuie sur une touche
 		SDL_WaitEvent(&event);
+		
 		switch(event.type) {
 			case SDL_QUIT:
 				continuer = 0;
@@ -33,32 +36,60 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 					case SDLK_UP:
 						if (leserpent->direction != bas) {
 							leserpent->direction = haut;
-							leserpent = avance(leserpent);
+							if (flag == 1) {
+								leserpent = grandit(leserpent);
+								flag = 0;
+							}
+							else {
+								leserpent = avance(leserpent);
+							}
 						}
 						break;
 
 					case SDLK_DOWN:
 						if (leserpent->direction != haut) {
 							leserpent->direction = bas;
-							leserpent = avance(leserpent);
+							if (flag == 1) {
+								leserpent = grandit(leserpent);
+								flag = 0;
+							}
+							else {
+								leserpent = avance(leserpent);
+							}
 						}
 						break;
 
 					case SDLK_RIGHT:
 						if (leserpent->direction != gauche) {
 							leserpent->direction = droite;
-							leserpent = avance(leserpent);
+							if (flag == 1) {
+								leserpent = grandit(leserpent);
+								flag = 0;
+							}
+							else {
+								leserpent = avance(leserpent);
+							}
 						}
 						break;
 
 					case SDLK_LEFT:
 						if (leserpent->direction != droite) {
 							leserpent->direction = gauche;
-							leserpent = avance(leserpent);
+							if (flag == 1) {
+								leserpent = grandit(leserpent);
+								flag = 0;
+							}
+							else {
+								leserpent = avance(leserpent);
+							}
 						}
 						break;
+					default:
+						break;
 				}
-			
+				default:
+					break;
+					
 		}
 
 		//printf("sortie du switch\n");
@@ -66,8 +97,9 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 		//on regarde si le serpent a mangé la pomme
 		mange = mange_pois(leserpent, lepois);
 		if (mange == 1) {
-			leserpent = grandit(leserpent);
 			lepois = init_pois(lepois, leserpent);
+			//on met un flag pour qu'il grandisse au prochain coup
+			flag = 1;
 			variables.score++;
 		}
 
