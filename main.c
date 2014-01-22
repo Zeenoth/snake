@@ -93,9 +93,6 @@ rafraichir(ecran, tete, leserpent, pomme, lepois);
  */
 
 var = controle(ecran, leserpent, lepois, tete, pomme, var);
-if (var.partie_finie == 0) {
-	printf("Au revoir !\n");
-}
 
 if (var.partie_finie == 1) {
 	printf("\nTon score : %d\n", var.score);
@@ -108,7 +105,9 @@ if (var.partie_finie == 1) {
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
 	affiche_scores(tableau);
-}	
+}
+
+printf("\nAu revoir !\n\n");
 /******************************************************************/
 	return 0;
 }
