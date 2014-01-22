@@ -55,8 +55,6 @@ visualiser_pois(lepois);
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
-
-
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
@@ -108,6 +106,11 @@ if (var.partie_finie == 1) {
 }
 
 printf("\nAu revoir !\n\n");
+
 /******************************************************************/
-	return 0;
+quit(leserpent);
+free(feuille_scores);
+free(tableau);
+
+return 0;
 }

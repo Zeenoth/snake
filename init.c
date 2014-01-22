@@ -70,3 +70,25 @@ SCORE* init_scores() {
 	
 	return t;
 }
+
+void quit(SERPENT s) {
+
+	s = supprime_tout(s);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+}
+

@@ -91,7 +91,7 @@ Liste supprimer_tete(Liste l) {
 }
 
 Liste supprime_tout(Liste l) {
-	printf("entrée dans supprime_tout\n");
+	//printf("entrée dans supprime_tout\n");
 	if (est_vide(l)==0)
 	{	if (l->suiv == NULL) {
 			printf("un seul élément dans la liste\n");

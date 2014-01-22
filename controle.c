@@ -13,7 +13,6 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 
 	//BOUCLE DE LA GESTION DES ÉVÈNEMENTS
 	while (continuer) {
-		printf("%d\n", flag);
 
 		//on attend que le joueur appuie sur une touche
 		SDL_WaitEvent(&event);
@@ -125,6 +124,10 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 
 		
 	}
+
+	SDL_FreeSurface(ecran);
+	SDL_FreeSurface(pomme);
+	SDL_FreeSurface(corps);
 
 	
 

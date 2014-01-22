@@ -30,6 +30,9 @@ SERPENT init_serpent(SERPENT le_serpent, int taille_serpent);
 //fonction qui alloue le tableau contenant les meilleurs scores et l'initialise
 SCORE* init_scores(void);
 
+//fonction qui quitte la SDL et vide la mémoire
+void quit(SERPENT s);
+
 
 
 
