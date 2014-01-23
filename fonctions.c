@@ -57,6 +57,7 @@ void visualiser_pois(POIS p) {
 }
 
 SERPENT grandit(SERPENT s) {
+	printf("entrée dans la fonction grandit\n");
 	//création du maillon qui sera la tête
 	Maillon tete;
 	tete.n = (s->n)+1; //mise à jour de la taille du serpent
@@ -83,6 +84,7 @@ SERPENT grandit(SERPENT s) {
 	}
 
 	s = ajout_tete(tete,s);
+	printf("sortie de la fonction grandit, taille %d\n", s->n);
 
 	return s;
 }

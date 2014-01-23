@@ -17,6 +17,7 @@ SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre) {
 }
 
 POIS init_pois(POIS p, SERPENT s) {
+	//printf("entrée dans init_pois\n");
 	
 	p.abscisse=rand()%(N-1);
 	p.ordonnee=rand()%(N-1);

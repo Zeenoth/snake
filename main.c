@@ -60,6 +60,11 @@ visualiser_pois(lepois);
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
+var.continuer = 1;
+var.mange = 0; //s"il mange le pois
+var.flag = 0;
+var.cogne = 0; //s'il se cogne contre un mur
+var.queue = 0; //s'il se mord la queue
 FILE* feuille_scores = NULL;
 SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
 
@@ -101,8 +106,8 @@ if (var.partie_finie == 1) {
 
 	tableau = charge_scores(feuille_scores, tableau);
 	int classement = merite(var.score, tableau);
-	printf("\nta position : %d\n", classement);
 	if (classement < 11) {
+		printf("\nta position : %d\n", classement);
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
 	affiche_scores(tableau);

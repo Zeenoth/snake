@@ -19,14 +19,20 @@
 #include "fichier.h"
 
 typedef struct {
-	int partie_finie;
+	int partie_finie;	//indique si l'on doit sortir de la boucle
 	int score;
+	int continuer;		//indique si l'on doit sortir de la boucle
+	int queue;		//indique si le serpent s'est mordu la queue
+	int mange;		//indique s'il a mangé le pois
+	int flag;		//s'il a mangé le pois, on met un flag pour s'en souvenir au prochain tour de boucle
+	int cogne;		//indique s'il s'est pris un mur
 } VARIABLES;
 
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables);
 
-
-
+//fonction qui fait déplacer le serpent : dans le cas général, il avance dans la bonne direction ;
+//s'il a mangé la pomme il faut aussi qu'il grandisse.
+VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables);
 
 
 
