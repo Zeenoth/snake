@@ -1,0 +1,32 @@
+DIRSDL=/users/prog1a/C/librairie/2011
+CFLAGS=-g -O2 -I$(DIRSDL)/include/SDL -I$(DIRSDL)/include
+LDFLAGS=-L$(DIRSDL)/lib -lSDLmain -lSDL -lSDL_ttf -lSDL_image -lSDL_sound -lSDL_phelma -lSDL_draw
+
+All: main.o liste.o fonctions.o init.o controle.o fichier.o
+	gcc main.o liste.o fonctions.o init.o controle.o fichier.o -o l $(LDFLAGS) $(CFLAGS)
+
+main.o: main.c
+	gcc -c main.c -o main.o $(CFLAGS)
+
+liste.o: liste.c
+	gcc -c liste.c -o liste.o $(CFLAGS)
+
+controle.o: controle.c
+	gcc -c controle.c -o controle.o $(CFLAGS)
+
+init.o: init.c
+	gcc -c init.c -o init.o $(CFLAGS)
+
+fichier.o: fichier.c
+	gcc -c fichier.c -o fichier.o $(CFLAGS)
+
+fonctions.o: fonctions.c
+	gcc -c fonctions.c -o fonctions.o $(CFLAGS)
+
+clean:
+	rm -r *.o
+
+mrproper:
+	rm -r *.o
+	rm -r l
+	rm -r *~
