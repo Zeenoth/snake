@@ -57,7 +57,7 @@ void visualiser_pois(POIS p) {
 }
 
 SERPENT grandit(SERPENT s) {
-	printf("entrée dans la fonction grandit\n");
+	//printf("entrée dans la fonction grandit\n");
 	//création du maillon qui sera la tête
 	Maillon tete;
 	tete.n = (s->n)+1; //mise à jour de la taille du serpent
@@ -84,7 +84,7 @@ SERPENT grandit(SERPENT s) {
 	}
 
 	s = ajout_tete(tete,s);
-	printf("sortie de la fonction grandit, taille %d\n", s->n);
+	//printf("sortie de la fonction grandit, taille %d\n", s->n);
 
 	return s;
 }
@@ -121,9 +121,7 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s) {
 			break;
 	}
 
-	p = p->suiv;
-
-	
+	p = p->suiv;	
 
 	while (est_vide(p)==0) {
 		SDL_Rect position_segment;

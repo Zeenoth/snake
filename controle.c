@@ -3,19 +3,21 @@
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables) {
 
         SDL_Event event;
-        int doit_avancer = 0;
         int tempsPrecedent = 0;
         int tempsActuel = 0;
+        int retour = 0; //drapeau pour éviter que deux appuis différents sur des flèches pendant la même UT ne fassent perdre
         
         //on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
 	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
 
+	fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
+	SDL_WaitEvent(&event);
+
         //BOUCLE DE LA GESTION DES ÉVÈNEMENTS
         while (variables.continuer) {
 		tempsActuel = SDL_GetTicks();
 
-                //dès que le joueur appuie sur une touche
                 SDL_PollEvent(&event);
                 
                 switch(event.type) {
@@ -34,31 +36,31 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
                                                 break;
                                         
                                         case SDLK_UP:
-                                                if (leserpent->direction != bas) {
+                                                if (leserpent->direction != bas && retour == 0) {
                                                         leserpent->direction = haut;
-                                                        doit_avancer = 1; //il faudra appeler la fonction bouge
                                                 }
+                                                else {retour =1;}
                                                 break;
 
                                         case SDLK_DOWN:
-                                                if (leserpent->direction != haut) {
+                                                if (leserpent->direction != haut && retour == 0) {
                                                         leserpent->direction = bas;
-                                                        doit_avancer = 1;
                                                 }
+                                                else {retour = 1;}
                                                 break;
 
                                         case SDLK_RIGHT:
                                                 if (leserpent->direction != gauche) {
-                                                        leserpent->direction = droite;
-                                                        doit_avancer = 1;                                                               
+                                                        leserpent->direction = droite;                                                              
                                                 }
+                                                else {retour = 1;}
                                                 break;
 
                                         case SDLK_LEFT:
-                                                if (leserpent->direction != droite) {
+                                                if (leserpent->direction != droite && retour == 0) {
                                                         leserpent->direction = gauche;
-                                                        doit_avancer = 1;
                                                 }
+                                                else {retour = 1;}
                                                 break;
                                         default:
                                                 break;
@@ -67,23 +69,23 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
                                         break;
                                         
                 }
+                
 if (tempsActuel - tempsPrecedent > UT) {
-                if (doit_avancer == 1) {
 			bouge(&leserpent, lepois, variables);
-			printf("après bouge, %d\n", leserpent->n);
+			//printf("après bouge, %d\n", leserpent->n);
 			variables.flag = 0;
-			printf("score %d\n", variables.score);
 		
-		doit_avancer = 0;
+		//doit_avancer = 0;
 
 		//on regarde si le serpent a mangé la pomme
 		variables.mange = mange_pois(leserpent, lepois);
-		printf("mangé %d\n", variables.mange);
+		//printf("mangé %d\n", variables.mange);
 		if (variables.mange == 1) {
 			lepois = init_pois(lepois, leserpent);
 			//on met un flag pour qu'il grandisse au prochain coup
 			variables.flag = 1;
 			variables.score++;
+			printf("score %d\n", variables.score);
 		}
 
 		//on regarde s'il s'est pris un mur
@@ -102,11 +104,12 @@ if (tempsActuel - tempsPrecedent > UT) {
 			variables.continuer = 0;
 		}
 
-		
-		}
                 rafraichir(ecran, corps, leserpent, pomme, lepois);
+                
 tempsPrecedent = tempsActuel;
 }
+else {retour = 0;}
+
         }
 
         SDL_FreeSurface(ecran);
@@ -117,7 +120,7 @@ tempsPrecedent = tempsActuel;
 }
 
 VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables) {
-	printf("flag début bouge %d\n", variables.flag);
+	//printf("flag début bouge %d\n", variables.flag);
 	if (variables.flag == 0) {
 		 *s = avance(*s);
 	 }
@@ -125,11 +128,11 @@ VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables) {
 	if (variables.flag == 1) {
 		//printf("ici grandit\n");
 		*s = grandit(*s);
-		printf("après grandit, %d\n", (*s)->n);
+		//printf("après grandit, %d\n", (*s)->n);
 	}
 
 	
-	printf("flag fin bouge %d\n", variables.flag);
+	//printf("flag fin bouge %d\n", variables.flag);
 
 	return variables;
 }
