@@ -32,6 +32,8 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 
 //fonction qui fait déplacer le serpent : dans le cas général, il avance dans la bonne direction ;
 //s'il a mangé la pomme il faut aussi qu'il grandisse.
+//passage par pointeur pour le serpent, car la fonction peut pas tout renvoyer ! À moins de rentrer le serpent
+//dans la structure VARIABLES...
 VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables);
 
 

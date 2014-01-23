@@ -101,12 +101,12 @@ rafraichir(ecran, tete, leserpent, pomme, lepois);
 var = controle(ecran, leserpent, lepois, tete, pomme, var);
 
 if (var.partie_finie == 1) {
-	printf("\nTon score : %d\n", var.score);
 	
 
 	tableau = charge_scores(feuille_scores, tableau);
 	int classement = merite(var.score, tableau);
 	if (classement < 11) {
+		printf("\nTon score : %d\n", var.score);
 		printf("\nta position : %d\n", classement);
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
