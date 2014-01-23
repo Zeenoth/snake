@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 
 SIZE = 70;
 N = 10;
-UT = 700;
+UT = 400;
 
 SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels

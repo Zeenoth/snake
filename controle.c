@@ -4,17 +4,19 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 
         SDL_Event event;
         int doit_avancer = 0;
+        int tempsPrecedent = 0;
+        int tempsActuel = 0;
+        
+        //on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
+	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
 
         //BOUCLE DE LA GESTION DES ÉVÈNEMENTS
         while (variables.continuer) {
-		//printf("\ndébut de la boucle principale, flag %d\n", variables.flag);
-
-		//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
-		SDL_EventState(SDL_KEYUP, SDL_IGNORE);
-		SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+		tempsActuel = SDL_GetTicks();
 
                 //dès que le joueur appuie sur une touche
-                SDL_WaitEvent(&event);
+                SDL_PollEvent(&event);
                 
                 switch(event.type) {
                         case SDL_QUIT:
@@ -65,7 +67,7 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
                                         break;
                                         
                 }
-
+if (tempsActuel - tempsPrecedent > UT) {
                 if (doit_avancer == 1) {
 			bouge(&leserpent, lepois, variables);
 			printf("après bouge, %d\n", leserpent->n);
@@ -103,6 +105,8 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 		
 		}
                 rafraichir(ecran, corps, leserpent, pomme, lepois);
+tempsPrecedent = tempsActuel;
+}
         }
 
         SDL_FreeSurface(ecran);
