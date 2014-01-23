@@ -136,12 +136,12 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s) {
 
 void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p) {
 
-	SDL_Rect position;
-	position.x = (p.abscisse) * SIZE;
-	position.y = (p.ordonnee) * SIZE;
-	SDL_BlitSurface(sprite, NULL, ecran, &position);
-	
-	SDL_Flip(ecran);
+        SDL_Rect position;
+        position.x = (p.abscisse) * SIZE;
+        position.y = (p.ordonnee) * SIZE;
+        SDL_BlitSurface(sprite, NULL, ecran, &position);
+        
+        SDL_Flip(ecran);
 }
 
 int mange_pois(SERPENT s, POIS p) {
@@ -171,7 +171,7 @@ int mange_serpent(SERPENT s) {
 }
 
 SERPENT avance(SERPENT s) {	
-	//la tête va avancer d'une case dans la bonne direction
+	//la tête va avancer d'une case dans la direction
 	//chaque segment va prendre les coordonnées de celui qui le précède
 
 	Liste cop = copie(s);

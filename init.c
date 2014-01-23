@@ -67,28 +67,5 @@ SCORE* init_scores() {
 	//for (i = 0 ; i < 10 ; i++) {
 	//	printf("%d\n", t[i].resultat);
 	//}
-	
 	return t;
 }
-
-void quit(SERPENT s) {
-
-	s = supprime_tout(s);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-}
-

@@ -23,10 +23,6 @@ liste.o: liste.c
 fonctions.o:  fonctions.c
 	gcc -c fonctions.c -o fonctions.o $(OPT) $(SDL)
 
-
-#prim.o: prim.c
-#	gcc -c prim.c -o prim.o $(OPT) $(SDL)
-
 clean:
 	rm -r *.o
 

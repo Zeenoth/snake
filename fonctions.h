@@ -43,9 +43,6 @@ int mange_serpent(SERPENT s);
 //fait avancer le serpent d'une position (met à jour les coordonnées)
 SERPENT avance(SERPENT s);
 
-//fonction qui s'occupe de déplacer le serpent : dans le cas général il avance mais il peut aussi grandir. La fonction vérifie s'il a mangé le pois ou s'est cogné
-
-
 //met à jour l'affichage : vide l'écran et affiche les nouvelles positions du pois et du serpent
 void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p);
 

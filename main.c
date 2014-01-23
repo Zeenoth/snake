@@ -36,7 +36,7 @@ ecran = init_SDL(ecran, taille_fenetre);
 printf("\ncréer le serpent\n");
 
 //taille initiale du serpent
-int taille_serpent = 4;
+int taille_serpent = 3;
 
 SERPENT leserpent = calloc(1, sizeof(*leserpent));
 leserpent = init_serpent(leserpent, taille_serpent);
@@ -55,6 +55,8 @@ visualiser_pois(lepois);
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
+
+
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
@@ -68,12 +70,13 @@ printf("\nFIN DE L'INITIALISATION\n\n");
 
 //chargement des sprites
 SDL_Surface* pomme = NULL;
-pomme = IMG_Load("sprites/apple60.jpg");
+pomme = IMG_Load("sprites/apple60.png");
 
 SDL_Surface* tete = NULL;
 tete = IMG_Load("sprites/corps.png");
 
 rafraichir(ecran, tete, leserpent, pomme, lepois);
+
 
 /*Tant que la partie n'est pas finie :
  *	le serpent avance d'une case par unité de temps
@@ -94,23 +97,18 @@ var = controle(ecran, leserpent, lepois, tete, pomme, var);
 
 if (var.partie_finie == 1) {
 	printf("\nTon score : %d\n", var.score);
+	
 
 	tableau = charge_scores(feuille_scores, tableau);
 	int classement = merite(var.score, tableau);
-	
+	printf("\nta position : %d\n", classement);
 	if (classement < 11) {
-		printf("\nta position : %d\n", classement);
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
 	affiche_scores(tableau);
 }
 
 printf("\nAu revoir !\n\n");
-
 /******************************************************************/
-quit(leserpent);
-free(feuille_scores);
-free(tableau);
-
-return 0;
+	return 0;
 }
