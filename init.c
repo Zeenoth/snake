@@ -11,6 +11,8 @@ SDL_Surface* init_SDL(SDL_Surface* ecran, int taille_fenetre) {
 		SDL_Quit();
 	}
 
+	TTF_Init();
+	
 	ecran = creer_fenetre(taille_fenetre, taille_fenetre);
 
 	return ecran;

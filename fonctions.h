@@ -12,6 +12,14 @@
 #include "init.h"
 #include "global.h"
 
+//Structure utile pour l'affichage du texte
+typedef struct {
+	TTF_Font* font;
+	SDL_Color color;
+	SDL_Surface* surface;
+	SDL_Rect pos;	//la position
+} TEXTE;
+
 
 //ouverture d'une fenêtre graphique blanche
 SDL_Surface* creer_fenetre(int largeur, int hauteur);
@@ -45,5 +53,7 @@ SERPENT avance(SERPENT s);
 
 //met à jour l'affichage : vide l'écran et affiche les nouvelles positions du pois et du serpent
 void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p);
+
+TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, int x, int y);
 
 #endif

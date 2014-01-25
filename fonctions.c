@@ -227,7 +227,21 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	SDL_Flip(ecran);
 }
 
-
+TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, int x, int y) {
+	printf("entrée dans creer_texte\n");
+	montexte.font = TTF_OpenFont(mapolice, taille);
+	if (montexte.font == NULL) {
+		printf("%s\n", TTF_GetError());
+		exit(0);
+	}
+	
+	montexte.surface = TTF_RenderText_Blended(montexte.font, message, montexte.color);
+	montexte.pos.x = x;
+	montexte.pos.y = y;
+	printf("%d %d\n", montexte.pos.x, montexte.pos.y);
+	
+	return montexte;
+}
 
 
 

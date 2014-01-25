@@ -7,7 +7,12 @@ SCORE* charge_scores(FILE* fichier, SCORE* tab) {
 	fichier = fopen("score.txt", "r+"); //ouverture du fichier en lecture et écriture
 	if (fichier == NULL) {
 		printf("Impossible d'ouvrir le fichier des scores\n");
-		exit(0);
+		printf("Création d'un nouveau fichier\n");
+		fichier = fopen("score.txt", "w");
+		if (fichier == NULL) {
+			printf("Impossible de créer un fichier de scores\n");
+			exit(0);
+		}
 	}
 		
 	int i = 0; //entier qui compte les positions dans les scores
@@ -78,7 +83,7 @@ void ecrit_score(int classement, int points, FILE* fichier, SCORE* tableau) {
 	printf("Quel est ton prénom ? (Ne pas mettre d'espace)\n");
 	char prenom[255];
 	scanf("%s", prenom);
-
+	
 	printf("ton nom est %s\n", prenom);
 
 	//on va écraser le fichier existant

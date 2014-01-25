@@ -19,16 +19,32 @@
 
 int main(int argc, char* argv[]) {
 
+/******************************************************************/
+		//VARIABLES UTILES POUR LE PROGRAMME
+
+VARIABLES var;
+var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
+var.score = 0; //compte le nombre de pois mangés par le serpent
+var.continuer = 1;
+var.mange = 0; //s"il mange le pois
+var.flag = 0;
+var.cogne = 0; //s'il se cogne contre un mur
+var.queue = 0; //s'il se mord la queue
+FILE* feuille_scores = NULL;
+SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
+SIZE = 70;
+N = 10;
+UT = 350;
+
 /*******************************************************************/
 		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
 
-SIZE = 70;
-N = 10;
-UT = 400;
 
 SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
 ecran = init_SDL(ecran, taille_fenetre);
+
+
 
 /******************************************************************/
 		//CRÉATION DU SERPENT
@@ -52,26 +68,7 @@ POIS lepois;
 lepois = init_pois(lepois, leserpent);
 visualiser_pois(lepois);
 
-/******************************************************************/
-		//VARIABLES UTILES POUR LE PROGRAMME
-
-
-
-VARIABLES var;
-var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
-var.score = 0; //compte le nombre de pois mangés par le serpent
-var.continuer = 1;
-var.mange = 0; //s"il mange le pois
-var.flag = 0;
-var.cogne = 0; //s'il se cogne contre un mur
-var.queue = 0; //s'il se mord la queue
-FILE* feuille_scores = NULL;
-SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
-
 printf("\nFIN DE L'INITIALISATION\n\n");
-
-/******************************************************************/
-		//BOUCLE DU PROGRAMME PRINCIPAL
 
 //chargement des sprites
 SDL_Surface* pomme = NULL;
@@ -79,6 +76,18 @@ pomme = IMG_Load("sprites/apple60.png");
 
 SDL_Surface* tete = NULL;
 tete = IMG_Load("sprites/corps.png");
+
+//chargement des textes à afficher
+TEXTE titre;
+titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake", 0, 0);
+SDL_Color noir = {0, 0, 0};
+titre.color = noir;
+printf("%d %d\n", (titre.surface)->h, (titre.surface)->w);
+printf("%d %d\n", titre.pos.x, titre.pos.y);
+SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
+SDL_Flip(ecran);
+/******************************************************************/
+		//BOUCLE DU PROGRAMME PRINCIPAL
 
 rafraichir(ecran, tete, leserpent, pomme, lepois);
 
@@ -115,5 +124,7 @@ if (var.partie_finie == 1) {
 
 printf("\nAu revoir !\n\n");
 /******************************************************************/
-	return 0;
+
+
+return 0;
 }
