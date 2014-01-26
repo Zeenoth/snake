@@ -24,6 +24,12 @@ int nouvelle_partie = 1;
 
 while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
 
+//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
+	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
+
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
@@ -96,11 +102,7 @@ snprintf(score_courant, 30, "Score : %d", var.score);
 lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
-//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
-	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
+
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -127,6 +129,7 @@ SDL_Flip(ecran);
  * 	afficher le score
  * 	s'il fait partie des dix meilleurs, demander le nom du joueur et l'ajouter dans le tableau
  * 	afficher le tableau des scores
+ * 	demander si le joueur veut refaire une partie
  */
 
 var = controle(ecran, leserpent, lepois, tete, pomme, var, lescore);
@@ -152,7 +155,6 @@ if (var.partie_finie == 1) {
 	affiche_scores(tableau);
 }
 /********************************************************************/
-// À PARTIR DE LÀ ÇA A CHANGÉ
 
 /*ici, on veut afficher le texte "veux-tu recommencer une partie ?"
  * puis deux boutons, oui et non, sur lesquels on peut cliquer pour choisir
@@ -173,20 +175,16 @@ SDL_BlitSurface(question2.surface, NULL, ecran, &(question2.pos));
 BOUTONS lesboutons;
 lesboutons = placer_boutons(ecran, lesboutons);
 
-/******************************************************************/
-printf("\nVeux-tu recommencer une partie ? [o/n]\n\n");
-	char recommencer;
-	scanf("%s", &recommencer);
-	if (recommencer == 'o') {
-		printf("coucou\n");
-	}
-	else {
-		printf("\n\nAu revoir!\n");
-		nouvelle_partie = 0;
-	}
-	
-/******************************************************************/
+if (clique_recommence(lesboutons) == 1) {
+	nouvelle_partie = 1;
+}
+else {
+	nouvelle_partie = 0;
+}
+
 } //fin du while(nouvelle partie)
+
+printf("\n\nAu revoir!\n");
 
 return 0;
 }

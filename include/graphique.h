@@ -30,7 +30,11 @@ typedef struct {
 	SDL_Rect pos_non;
 } BOUTONS;			//structure qui contient les deux boutons pour choisir si on veut recommencer une partie
 
+//place graphiquement les deux boutons "oui" et "non" à la fin de la partie
 BOUTONS placer_boutons(SDL_Surface* ecran, BOUTONS lesboutons);
+
+//renvoie 1 si le joueur clique sur "oui", 0 s'il clique sur "non"
+int clique_recommence(BOUTONS lesboutons);
 
 
 #endif

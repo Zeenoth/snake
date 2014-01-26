@@ -16,3 +16,44 @@ BOUTONS placer_boutons(SDL_Surface* ecran, BOUTONS lesboutons) {
 
 	return lesboutons;
 }
+
+int clique_recommence(BOUTONS lesboutons) {
+
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_ENABLE);
+	
+	int choix = 14;
+	SDL_Event event;
+
+	while (choix == 14) {
+		SDL_WaitEvent(&event);
+		switch (event.type) {
+			case SDL_QUIT:
+				return -14;
+				break;
+				
+			case SDL_MOUSEBUTTONUP:
+				//pour valider le clic il faut que
+				//le bouton soit le gauche
+				//le curseur se trouve sur un des boutons de choix
+				if (event.button.button == SDL_BUTTON_LEFT &&
+					event.button.x > lesboutons.pos_oui.x && event.button.x < lesboutons.pos_oui.x + lesboutons.boutonoui->w &&
+					event.button.y > lesboutons.pos_oui.y && event.button.y < lesboutons.pos_oui.y + lesboutons.boutonoui->h)
+					{
+					choix = 1;
+				}
+				if (event.button.button == SDL_BUTTON_LEFT &&
+					event.button.x > lesboutons.pos_non.x && event.button.x < lesboutons.pos_non.x + lesboutons.boutonnon->w &&
+					event.button.y > lesboutons.pos_non.y && event.button.y < lesboutons.pos_non.y + lesboutons.boutonnon->h)
+					{
+					choix = 0;
+				}
+				break;
+
+			default: break;
+		}
+	}
+
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
+
+	return choix;
+}
