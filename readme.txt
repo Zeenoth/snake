@@ -1,5 +1,11 @@
+Pour compiler, utiliser la commande make. Il faut avoir les bibliothèques
+	SDL
+	SDL_image
+	SDL_draw
+	SDL_ttf
+Pour compiler sur les ordis de l'école, remplacer le makefile par le fichier "makefile ecole" présent dans le dossier makefiles.
+
 Pour lancer le jeu, il suffit de le lancer en ligne de commande, il n'y a pas besoin de paramètres.
-Appuyer sur une touche pour commencer la partie.
 
 Par défaut, la fenêtre utilisée est une grille de N=10 cases de côté ; chaque case fait SIZE=70 pixels.
 Ces paramètres sont des variables globales et sont modifiables dans le fichier main.c.

@@ -5,23 +5,23 @@ SDL= -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_draw
 All: main.o liste.o fonctions.o init.o controle.o fichier.o
 	gcc main.o liste.o fonctions.o init.o controle.o fichier.o -o l $(OPT) $(SDL)
 
-main.o: main.c
-	gcc -c main.c -o main.o $(OPT) $(SDL)
+main.o: src/main.c
+	gcc -c src/main.c -o main.o $(OPT) $(SDL)
 
-fichier.o: fichier.c
-	gcc -c fichier.c -o fichier.o $(OPT) $(SDL)
+fichier.o: src/fichier.c
+	gcc -c src/fichier.c -o fichier.o $(OPT) $(SDL)
 
-init.o: init.c
-	gcc -c init.c -o init.o $(OPT) $(SDL)
+init.o: src/init.c
+	gcc -c src/init.c -o init.o $(OPT) $(SDL)
 
-controle.o: controle.c
-	gcc -c controle.c -o controle.o $(OPT) $(SDL)
+controle.o: src/controle.c
+	gcc -c src/controle.c -o controle.o $(OPT) $(SDL)
 
-liste.o: liste.c
-	gcc -c liste.c -o liste.o $(OPT) $(SDL)
+liste.o: src/liste.c
+	gcc -c src/liste.c -o liste.o $(OPT) $(SDL)
 
-fonctions.o:  fonctions.c
-	gcc -c fonctions.c -o fonctions.o $(OPT) $(SDL)
+fonctions.o:  src/fonctions.c
+	gcc -c src/fonctions.c -o fonctions.o $(OPT) $(SDL)
 
 clean:
 	rm -r *.o
