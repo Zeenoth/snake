@@ -131,7 +131,15 @@ SDL_Flip(ecran);
 var = controle(ecran, leserpent, lepois, tete, pomme, var, lescore);
 
 if (var.partie_finie == 1) {
-	
+	//affichage du score final
+	TEXTE resultat;
+	char score_final[30];
+	snprintf(score_final, 30, "Ton score : %d", var.score);
+	resultat = creer_texte(resultat, "sprites/Fibography_PersonalUse.ttf", 35, score_final, noir);
+	resultat = positionner_texte(resultat, floor(N*SIZE/2 - resultat.surface->w/2), 0);
+	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+	SDL_BlitSurface(resultat.surface, NULL, ecran, &(resultat.pos));
+	SDL_Flip(ecran);
 
 	tableau = charge_scores(feuille_scores, tableau);
 	int classement = merite(var.score, tableau);
@@ -142,7 +150,24 @@ if (var.partie_finie == 1) {
 	}
 	affiche_scores(tableau);
 }
+// À PARTIR DE LÀ ÇA A CHANGÉ
+/*ici, on veut afficher le texte "veux-tu recommencer une partie ?"
+ * puis deux boutons, oui et non, sur lesquels on peut cliquer pour choisir
+ * */
+SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+ 
+TEXTE question1; //la question ne rentre pas sur une ligne
+TEXTE question2;
+//TEXTE question3;
+question1 = creer_texte(question1, "sprites/alphawood.ttf", 50, "Veux tu recommencer", noir);
+question2 = creer_texte(question2, "sprites/alphawood.ttf", 50, "une partie ?", noir);
+question1 = positionner_texte(question1, floor(N*SIZE/2 - question1.surface->w/2), floor(N*SIZE/4));
+question2 = positionner_texte(question2, floor(N*SIZE/2 - question2.surface->w/2), floor(N*SIZE/4) + 50);
+SDL_BlitSurface(question1.surface, NULL, ecran, &(question1.pos));
+SDL_BlitSurface(question2.surface, NULL, ecran, &(question2.pos));
+SDL_Flip(ecran);
 
+/******************************************************************/
 printf("\nVeux-tu recommencer une partie ? [o/n]\n\n");
 	char recommencer;
 	scanf("%s", &recommencer);
