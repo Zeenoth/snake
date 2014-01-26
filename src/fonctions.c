@@ -101,22 +101,22 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s) {
 
 	switch(s->direction) {
 		case droite: 
-			tete = IMG_Load("sprites/droite.png");
+			tete = IMG_Load("data/droite.png");
 			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
 			break;
 
 		case gauche: 
-			tete = IMG_Load("sprites/gauche.png");
+			tete = IMG_Load("data/gauche.png");
 			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
 			break;
 
 		case bas: 
-			tete = IMG_Load("sprites/bas.png");
+			tete = IMG_Load("data/bas.png");
 			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
 			break;
 
 		case haut: 
-			tete = IMG_Load("sprites/haut.png");
+			tete = IMG_Load("data/haut.png");
 			SDL_BlitSurface(tete, NULL, ecran, &position_segment);
 			break;
 	}
@@ -223,7 +223,7 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	char score_courant[30];
 	snprintf(score_courant, 30, "Score : %d", score_num);
 	SDL_Color noir = {0, 0, 0};
-	*lescore = creer_texte(*lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
+	*lescore = creer_texte(*lescore, "data/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 	*lescore = positionner_texte(*lescore, floor(N*SIZE - lescore->surface->w), 0);
      
 	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */

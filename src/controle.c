@@ -142,7 +142,7 @@ int pause(SDL_Surface* ecran) {
 	SDL_Event event;
 	SDL_Color noir = {0, 0, 0};
 	TEXTE info;
-	info = creer_texte(info, "sprites/alphawood.ttf", 35, "Appuie sur R pour reprendre", noir);
+	info = creer_texte(info, "data/alphawood.ttf", 35, "Appuie sur R pour reprendre", noir);
 	info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*3/4);
 	SDL_BlitSurface(info.surface, NULL, ecran, &(info.pos));
 	SDL_Flip(ecran);

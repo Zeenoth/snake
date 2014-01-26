@@ -76,30 +76,30 @@ lepois = init_pois(lepois, leserpent);
 /*******************************************************************/
 //chargement des sprites
 SDL_Surface* pomme = NULL;
-pomme = IMG_Load("sprites/apple60.png");
+pomme = IMG_Load("data/apple60.png");
 
 SDL_Surface* tete = NULL;
-tete = IMG_Load("sprites/corps.png");
+tete = IMG_Load("data/corps.png");
 
 //chargement des textes à afficher
 SDL_Color noir = {0, 0, 0};
 
 TEXTE titre;
-titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
+titre = creer_texte(titre, "data/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
 titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/4));
 
 TEXTE instructions;
-instructions = creer_texte(instructions, "sprites/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
+instructions = creer_texte(instructions, "data/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
 instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), titre.pos.y + 1.5*SIZE);
 
 TEXTE info;
-info = creer_texte(info, "sprites/alphawood.ttf", 35, "Appuie sur P pour mettre en pause", noir);
+info = creer_texte(info, "data/alphawood.ttf", 35, "Appuie sur P pour mettre en pause", noir);
 info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*4/5);
 
 TEXTE lescore;
 char score_courant[30];
 snprintf(score_courant, 30, "Score : %d", var.score);
-lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
+lescore = creer_texte(lescore, "data/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
 printf("\nFIN DE L'INITIALISATION\n\n");
@@ -138,7 +138,7 @@ if (var.partie_finie == 1) {
 	TEXTE resultat;
 	char score_final[30];
 	snprintf(score_final, 30, "Ton score : %d", var.score);
-	resultat = creer_texte(resultat, "sprites/Fibography_PersonalUse.ttf", 35, score_final, noir);
+	resultat = creer_texte(resultat, "data/Fibography_PersonalUse.ttf", 35, score_final, noir);
 	resultat = positionner_texte(resultat, floor(N*SIZE/2 - resultat.surface->w/2), 0);
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 	SDL_BlitSurface(resultat.surface, NULL, ecran, &(resultat.pos));
@@ -163,8 +163,8 @@ SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 //affichage de la question 
 TEXTE question1;
 TEXTE question2;
-question1 = creer_texte(question1, "sprites/alphawood.ttf", 50, "Veux tu recommencer", noir);
-question2 = creer_texte(question2, "sprites/alphawood.ttf", 50, "une partie ?", noir);
+question1 = creer_texte(question1, "data/alphawood.ttf", 50, "Veux tu recommencer", noir);
+question2 = creer_texte(question2, "data/alphawood.ttf", 50, "une partie ?", noir);
 question1 = positionner_texte(question1, floor(N*SIZE/2 - question1.surface->w/2), floor(N*SIZE/4));
 question2 = positionner_texte(question2, floor(N*SIZE/2 - question2.surface->w/2), floor(N*SIZE/4) + 50);
 SDL_BlitSurface(question1.surface, NULL, ecran, &(question1.pos));
