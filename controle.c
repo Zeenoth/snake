@@ -83,7 +83,7 @@ if (tempsActuel - tempsPrecedent > UT) {
 			//on met un flag pour qu'il grandisse au prochain coup
 			variables.flag = 1;
 			variables.score++;
-			printf("score %d\n", variables.score);
+			//printf("score %d\n", variables.score);
 		}
 
 		//on regarde s'il s'est pris un mur

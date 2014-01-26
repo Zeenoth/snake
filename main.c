@@ -66,7 +66,6 @@ POIS lepois;
 lepois = init_pois(lepois, leserpent);
 visualiser_pois(lepois);
 
-printf("\nFIN DE L'INITIALISATION\n\n");
 
 /*******************************************************************/
 //chargement des sprites
@@ -93,6 +92,9 @@ snprintf(score_courant, 30, "Score : %d", var.score);
 lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
+
+printf("\nFIN DE L'INITIALISATION\n\n");
+
 /******************************************************************/
 		//BOUCLE DU PROGRAMME PRINCIPAL
 
@@ -105,6 +107,9 @@ SDL_Flip(ecran);
 //on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
 	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
+	
 	
 /*Tant que la partie n'est pas finie :
  *	le serpent avance d'une case par unité de temps
@@ -136,7 +141,13 @@ if (var.partie_finie == 1) {
 	affiche_scores(tableau);
 }
 
-printf("\nAu revoir !\n\n");
+printf("\nVeux-tu recommencer une partie ? [o/n]\n\n");
+char recommencer;
+scanf("%c", &recommencer);
+printf("ici\n");
+if (recommencer == 'o') {
+	printf("coucou\n");
+}
 /******************************************************************/
 
 
