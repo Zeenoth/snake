@@ -45,7 +45,7 @@ SERPENT init_serpent(SERPENT le_serpent, int taille_serpent) {
 
 	le_serpent->n = 1;
 	le_serpent->direction = droite; //en début de partie il commence vers la droite
-	le_serpent->coord.abscisse = floor(N/2); //il apparaît au centre de l'écran
+	le_serpent->coord.abscisse = floor(N/2) - 2; //il apparaît au centre de l'écran
 	le_serpent->coord.ordonnee = floor(N/2);
 
 	while (le_serpent->n < taille_serpent) {
