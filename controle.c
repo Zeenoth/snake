@@ -7,9 +7,12 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
         int tempsActuel = 0;
         int retour = 0; //drapeau pour éviter que deux appuis différents sur des flèches pendant la même UT ne fassent perdre
         
-        
-
 	fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
+	//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
+	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
 	SDL_WaitEvent(&event);
 
         //BOUCLE DE LA GESTION DES ÉVÈNEMENTS

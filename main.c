@@ -19,6 +19,10 @@
 
 int main(int argc, char* argv[]) {
 
+int nouvelle_partie = 1;
+
+while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
+
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
@@ -38,7 +42,6 @@ UT = 350;
 
 /*******************************************************************/
 		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
-
 
 SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
@@ -92,6 +95,11 @@ snprintf(score_courant, 30, "Score : %d", var.score);
 lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
+//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
+	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -103,12 +111,6 @@ SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
 SDL_BlitSurface(instructions.surface, NULL, ecran, &(instructions.pos));
 SDL_BlitSurface(lescore.surface, NULL, ecran, &(lescore.pos));
 SDL_Flip(ecran);
-
-//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
-	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
 	
 	
 /*Tant que la partie n'est pas finie :
@@ -142,14 +144,18 @@ if (var.partie_finie == 1) {
 }
 
 printf("\nVeux-tu recommencer une partie ? [o/n]\n\n");
-char recommencer;
-scanf("%c", &recommencer);
-printf("ici\n");
-if (recommencer == 'o') {
-	printf("coucou\n");
-}
+	char recommencer;
+	scanf("%s", &recommencer);
+	if (recommencer == 'o') {
+		printf("coucou\n");
+	}
+	else {
+		printf("\n\nAu revoir!\n");
+		nouvelle_partie = 0;
+	}
+	
 /******************************************************************/
-
+} //fin du while(nouvelle partie)
 
 return 0;
 }
