@@ -1,16 +1,26 @@
 #ifndef _FONCTIONS_H_
-
 #define _FONCTIONS_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
 
 #include <SDL/SDL_image.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_draw.h>
 #include <SDL/SDL_ttf.h>
-#include <time.h>
 
 #include "liste.h"
+#include "fonctions.h"
 #include "init.h"
 #include "global.h"
+#include "controle.h"
+#include "fichier.h"
+
+#ifndef _TEXTE_
+#define _TEXTE_
 
 //Structure utile pour l'affichage du texte
 typedef struct {
@@ -19,7 +29,7 @@ typedef struct {
 	SDL_Surface* surface;
 	SDL_Rect pos;	//la position
 } TEXTE;
-
+#endif
 
 //ouverture d'une fenêtre graphique blanche
 SDL_Surface* creer_fenetre(int largeur, int hauteur);
@@ -52,12 +62,12 @@ int mange_serpent(SERPENT s);
 SERPENT avance(SERPENT s);
 
 //met à jour l'affichage : vide l'écran et affiche les nouvelles positions du pois et du serpent
-void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p);
+void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p, TEXTE* lescore, int score_num);
 
 //fonctions qui remplissent une structure TEXTE afin qu'il n'y ait plus qu'à la blitter.
 //Attention, il faut les appeler dans cet ordre si on veut que la position du texte dépende de sa taille (centré dans la fenêtre par ex)
 //x et y sont l'abscisse et l'ordonnée du coin supérieur gauche de l'étiquette contenant le texte.
-TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message);
+TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
 TEXTE positionner_texte(TEXTE montexte, int x, int y);
 
 #endif

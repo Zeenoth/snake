@@ -1,15 +1,13 @@
 #include "controle.h"
 
-VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables) {
+VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables, TEXTE lescore) {
 
         SDL_Event event;
         int tempsPrecedent = 0;
         int tempsActuel = 0;
         int retour = 0; //drapeau pour éviter que deux appuis différents sur des flèches pendant la même UT ne fassent perdre
         
-        //on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
-	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+        
 
 	fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
 	SDL_WaitEvent(&event);
@@ -104,7 +102,7 @@ if (tempsActuel - tempsPrecedent > UT) {
 			variables.continuer = 0;
 		}
 
-                rafraichir(ecran, corps, leserpent, pomme, lepois);
+                rafraichir(ecran, corps, leserpent, pomme, lepois, &lescore, variables.score);
                 
 tempsPrecedent = tempsActuel;
 }

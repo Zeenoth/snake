@@ -80,24 +80,32 @@ tete = IMG_Load("sprites/corps.png");
 SDL_Color noir = {0, 0, 0};
 
 TEXTE titre;
-titre.color = noir;
-titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake");
+titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
 titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/4));
 
 TEXTE instructions;
-instructions.color = noir;
-instructions = creer_texte(instructions, "sprites/alphawood.ttf", 35, "Appuie sur une touche pour commencer");
+instructions = creer_texte(instructions, "sprites/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
 instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), titre.pos.y + 1.5*SIZE);
+
+TEXTE lescore;
+char score_courant[30];
+snprintf(score_courant, 30, "Score : %d", var.score);
+lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
+lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
 /******************************************************************/
 		//BOUCLE DU PROGRAMME PRINCIPAL
 
-rafraichir(ecran, tete, leserpent, pomme, lepois);
+rafraichir(ecran, tete, leserpent, pomme, lepois, &lescore, var.score);
 SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
 SDL_BlitSurface(instructions.surface, NULL, ecran, &(instructions.pos));
+SDL_BlitSurface(lescore.surface, NULL, ecran, &(lescore.pos));
 SDL_Flip(ecran);
 
-
+//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
+	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	
 /*Tant que la partie n'est pas finie :
  *	le serpent avance d'une case par unité de temps
  *	si on appuie sur une flèche du clavier, il change de direction pour le mouvement suivant
@@ -113,7 +121,7 @@ SDL_Flip(ecran);
  * 	afficher le tableau des scores
  */
 
-var = controle(ecran, leserpent, lepois, tete, pomme, var);
+var = controle(ecran, leserpent, lepois, tete, pomme, var, lescore);
 
 if (var.partie_finie == 1) {
 	

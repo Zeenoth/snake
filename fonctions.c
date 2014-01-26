@@ -215,26 +215,35 @@ SERPENT avance(SERPENT s) {
 	return s;
 }
 
-void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p) {
+void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p, TEXTE* lescore, int score_num) {
 	//On efface l'écran (ici fond blanc) :
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+
+	//Mise à jour du score à afficher
+	char score_courant[30];
+	snprintf(score_courant, 30, "Score : %d", score_num);
+	SDL_Color noir = {0, 0, 0};
+	*lescore = creer_texte(*lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
+	*lescore = positionner_texte(*lescore, floor(N*SIZE - lescore->surface->w), 0);
      
 	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */
 	affiche_pois(ecran, pomme, p);
 	affiche_serpent(ecran, tete, s);
+	SDL_BlitSurface(lescore->surface, NULL, ecran, &(lescore->pos));
  
 	/* On met à jour l'affichage : */
 	SDL_Flip(ecran);
 }
 
-TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message) {
-	printf("entrée dans creer_texte\n");
+TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur) {
+	//printf("entrée dans creer_texte\n");
 	montexte.font = TTF_OpenFont(mapolice, taille);
 	if (montexte.font == NULL) {
 		printf("%s\n", TTF_GetError());
 		exit(0);
 	}
 	
+	montexte.color = couleur;
 	montexte.surface = TTF_RenderText_Blended(montexte.font, message, montexte.color);
 	
 	return montexte;
