@@ -57,24 +57,20 @@ ecran = init_SDL(ecran, taille_fenetre);
 /******************************************************************/
 		//CRÉATION DU SERPENT
 
-printf("\ncréer le serpent\n");
-
 //taille initiale du serpent
 int taille_serpent = 3;
 
 SERPENT leserpent = calloc(1, sizeof(*leserpent));
 leserpent = init_serpent(leserpent, taille_serpent);
-printf("serpent initialisé : \n");
-visualiser_liste(leserpent);
+//visualiser_liste(leserpent);
 
 /******************************************************************/
 		//PLACEMENT DU POIS
 
-printf("\nplacer le pois\n");
 srand(time(NULL)); //initialisation de la fonction random
 POIS lepois;
 lepois = init_pois(lepois, leserpent);
-visualiser_pois(lepois);
+//visualiser_pois(lepois);
 
 
 /*******************************************************************/

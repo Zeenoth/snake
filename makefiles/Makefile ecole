@@ -2,26 +2,29 @@ DIRSDL=/users/prog1a/C/librairie/2011
 CFLAGS=-g -O2 -I$(DIRSDL)/include/SDL -I$(DIRSDL)/include
 LDFLAGS=-L$(DIRSDL)/lib -lSDLmain -lSDL -lSDL_ttf -lSDL_image -lSDL_sound -lSDL_phelma -lSDL_draw
 
-All: main.o liste.o fonctions.o init.o controle.o fichier.o
-	gcc main.o liste.o fonctions.o init.o controle.o fichier.o -o l $(LDFLAGS) $(CFLAGS)
+All: main.o liste.o fonctions.o init.o controle.o fichier.o graphique.o
+	gcc main.o liste.o fonctions.o init.o controle.o fichier.o graphique.o -o l $(CFLAGS)
 
-main.o: main.c
-	gcc -c main.c -o main.o $(CFLAGS)
+main.o: src/main.c
+	gcc -c src/main.c -o main.o $(CFLAGS)
 
-liste.o: liste.c
-	gcc -c liste.c -o liste.o $(CFLAGS)
+fichier.o: src/fichier.c
+	gcc -c src/fichier.c -o fichier.o $(CFLAGS)
 
-controle.o: controle.c
-	gcc -c controle.c -o controle.o $(CFLAGS)
+init.o: src/init.c
+	gcc -c src/init.c -o init.o $(CFLAGS)
 
-init.o: init.c
-	gcc -c init.c -o init.o $(CFLAGS)
+controle.o: src/controle.c
+	gcc -c src/controle.c -o controle.o $(CFLAGS)
 
-fichier.o: fichier.c
-	gcc -c fichier.c -o fichier.o $(CFLAGS)
+liste.o: src/liste.c
+	gcc -c src/liste.c -o liste.o $(CFLAGS)
 
-fonctions.o: fonctions.c
-	gcc -c fonctions.c -o fonctions.o $(CFLAGS)
+fonctions.o:  src/fonctions.c
+	gcc -c src/fonctions.c -o fonctions.o $(CFLAGS)
+
+graphique.o: src/graphique.c
+	gcc -c src/graphique.c -o graphique.o $(CFLAGS)
 
 clean:
 	rm -r *.o
@@ -30,3 +33,4 @@ mrproper:
 	rm -r *.o
 	rm -r l
 	rm -r *~
+
