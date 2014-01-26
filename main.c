@@ -44,8 +44,6 @@ SDL_Surface* ecran = NULL;
 int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
 ecran = init_SDL(ecran, taille_fenetre);
 
-
-
 /******************************************************************/
 		//CRÉATION DU SERPENT
 
@@ -70,6 +68,7 @@ visualiser_pois(lepois);
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
+/*******************************************************************/
 //chargement des sprites
 SDL_Surface* pomme = NULL;
 pomme = IMG_Load("sprites/apple60.png");
@@ -78,18 +77,25 @@ SDL_Surface* tete = NULL;
 tete = IMG_Load("sprites/corps.png");
 
 //chargement des textes à afficher
-TEXTE titre;
-titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake", 0, 0);
 SDL_Color noir = {0, 0, 0};
+
+TEXTE titre;
 titre.color = noir;
-printf("%d %d\n", (titre.surface)->h, (titre.surface)->w);
-printf("%d %d\n", titre.pos.x, titre.pos.y);
-SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
-SDL_Flip(ecran);
+titre = creer_texte(titre, "sprites/alphawood.ttf", 75, "Bienvenue dans Snake");
+titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/4));
+
+TEXTE instructions;
+instructions.color = noir;
+instructions = creer_texte(instructions, "sprites/alphawood.ttf", 35, "Appuie sur une touche pour commencer");
+instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), titre.pos.y + 1.5*SIZE);
+
 /******************************************************************/
 		//BOUCLE DU PROGRAMME PRINCIPAL
 
 rafraichir(ecran, tete, leserpent, pomme, lepois);
+SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
+SDL_BlitSurface(instructions.surface, NULL, ecran, &(instructions.pos));
+SDL_Flip(ecran);
 
 
 /*Tant que la partie n'est pas finie :

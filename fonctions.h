@@ -54,6 +54,10 @@ SERPENT avance(SERPENT s);
 //met à jour l'affichage : vide l'écran et affiche les nouvelles positions du pois et du serpent
 void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* pomme, POIS p);
 
-TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, int x, int y);
+//fonctions qui remplissent une structure TEXTE afin qu'il n'y ait plus qu'à la blitter.
+//Attention, il faut les appeler dans cet ordre si on veut que la position du texte dépende de sa taille (centré dans la fenêtre par ex)
+//x et y sont l'abscisse et l'ordonnée du coin supérieur gauche de l'étiquette contenant le texte.
+TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message);
+TEXTE positionner_texte(TEXTE montexte, int x, int y);
 
 #endif
