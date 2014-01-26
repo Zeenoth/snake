@@ -35,6 +35,17 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
                                                 variables.partie_finie = 0;
                                                 return variables;
                                                 break;
+
+                                        case SDLK_p:
+						if(pause(ecran) == 2) {
+							variables.continuer = 0;
+							variables.partie_finie = 0;
+						}
+						else {
+							event.key.keysym.sym = SDLK_u;
+							tempsActuel = tempsPrecedent;
+						}
+						break;
                                         
                                         case SDLK_UP:
                                                 if (leserpent->direction != bas && retour == 0) {
@@ -72,27 +83,21 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
                 }
                 
 if (tempsActuel - tempsPrecedent > UT) {
-			bouge(&leserpent, lepois, variables);
-			//printf("après bouge, %d\n", leserpent->n);
-			variables.flag = 0;
-		
-		//doit_avancer = 0;
+		bouge(&leserpent, lepois, variables);
+		variables.flag = 0;
 
 		//on regarde si le serpent a mangé la pomme
 		variables.mange = mange_pois(leserpent, lepois);
-		//printf("mangé %d\n", variables.mange);
 		if (variables.mange == 1) {
 			lepois = init_pois(lepois, leserpent);
 			//on met un flag pour qu'il grandisse au prochain coup
 			variables.flag = 1;
 			variables.score++;
-			//printf("score %d\n", variables.score);
 		}
 
 		//on regarde s'il s'est pris un mur
 		variables.cogne = cogne_mur(leserpent, N, N);
 		if (variables.cogne == 1) {
-			//printf("\nperdu !\n");
 			variables.partie_finie = 1;
 			variables.continuer = 0;
 		}
@@ -100,7 +105,6 @@ if (tempsActuel - tempsPrecedent > UT) {
 		//on regarde s'il se mord la queue
 		variables.queue = mange_serpent(leserpent);
 		if (variables.queue == 1) {
-			//printf("\nperdu !\n");
 			variables.partie_finie = 1;
 			variables.continuer = 0;
 		}
@@ -109,10 +113,11 @@ if (tempsActuel - tempsPrecedent > UT) {
                 
 tempsPrecedent = tempsActuel;
 }
-else {retour = 0;}
+else {
+	retour = 0;
+}
 
-        }
-
+        } //fin du while
         SDL_FreeSurface(ecran);
         SDL_FreeSurface(pomme);
         SDL_FreeSurface(corps);
@@ -121,21 +126,53 @@ else {retour = 0;}
 }
 
 VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables) {
-	//printf("flag début bouge %d\n", variables.flag);
 	if (variables.flag == 0) {
 		 *s = avance(*s);
 	 }
 	
 	if (variables.flag == 1) {
-		//printf("ici grandit\n");
 		*s = grandit(*s);
-		//printf("après grandit, %d\n", (*s)->n);
 	}
-
-	
-	//printf("flag fin bouge %d\n", variables.flag);
 
 	return variables;
 }
 
+int pause(SDL_Surface* ecran) {
+	int reprend = 0;
+	SDL_Event event;
+	SDL_Color noir = {0, 0, 0};
+	TEXTE info;
+	info = creer_texte(info, "sprites/alphawood.ttf", 35, "Appuie sur R pour reprendre", noir);
+	info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*3/4);
+	SDL_BlitSurface(info.surface, NULL, ecran, &(info.pos));
+	SDL_Flip(ecran);
+
+	while (reprend == 0) {
+		SDL_PollEvent(&event);
+
+		switch (event.type) {
+			case SDL_QUIT:
+				reprend =  2;
+				break;
+
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+					case SDLK_ESCAPE:
+						reprend = 2;
+						break;
+
+					case SDLK_r:
+						reprend = 1;
+						break;
+
+					default:
+						break;
+				}
+
+			default:
+				break;
+		}
+	}
+	return reprend;
+}
 

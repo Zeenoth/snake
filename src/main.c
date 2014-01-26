@@ -92,13 +92,15 @@ TEXTE instructions;
 instructions = creer_texte(instructions, "sprites/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
 instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), titre.pos.y + 1.5*SIZE);
 
+TEXTE info;
+info = creer_texte(info, "sprites/alphawood.ttf", 35, "Appuie sur P pour mettre en pause", noir);
+info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*4/5);
+
 TEXTE lescore;
 char score_courant[30];
 snprintf(score_courant, 30, "Score : %d", var.score);
 lescore = creer_texte(lescore, "sprites/Fibography_PersonalUse.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
-
-
 
 printf("\nFIN DE L'INITIALISATION\n\n");
 
@@ -109,6 +111,7 @@ rafraichir(ecran, tete, leserpent, pomme, lepois, &lescore, var.score);
 SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
 SDL_BlitSurface(instructions.surface, NULL, ecran, &(instructions.pos));
 SDL_BlitSurface(lescore.surface, NULL, ecran, &(lescore.pos));
+SDL_BlitSurface(info.surface, NULL, ecran, &(info.pos));
 SDL_Flip(ecran);
 	
 	

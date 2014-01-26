@@ -48,6 +48,8 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 //dans la structure VARIABLES...
 VARIABLES bouge(SERPENT *s, POIS p, VARIABLES variables);
 
+//met le jeu en pause
+int pause(SDL_Surface* ecran);
 
 
 
