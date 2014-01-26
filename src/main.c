@@ -15,6 +15,7 @@
 #include "../include/global.h"
 #include "../include/controle.h"
 #include "../include/fichier.h"
+#include "../include/graphique.h"
 
 
 int main(int argc, char* argv[]) {
@@ -150,22 +151,27 @@ if (var.partie_finie == 1) {
 	}
 	affiche_scores(tableau);
 }
+/********************************************************************/
 // À PARTIR DE LÀ ÇA A CHANGÉ
+
 /*ici, on veut afficher le texte "veux-tu recommencer une partie ?"
  * puis deux boutons, oui et non, sur lesquels on peut cliquer pour choisir
  * */
 SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
- 
-TEXTE question1; //la question ne rentre pas sur une ligne
+
+//affichage de la question 
+TEXTE question1;
 TEXTE question2;
-//TEXTE question3;
 question1 = creer_texte(question1, "sprites/alphawood.ttf", 50, "Veux tu recommencer", noir);
 question2 = creer_texte(question2, "sprites/alphawood.ttf", 50, "une partie ?", noir);
 question1 = positionner_texte(question1, floor(N*SIZE/2 - question1.surface->w/2), floor(N*SIZE/4));
 question2 = positionner_texte(question2, floor(N*SIZE/2 - question2.surface->w/2), floor(N*SIZE/4) + 50);
 SDL_BlitSurface(question1.surface, NULL, ecran, &(question1.pos));
 SDL_BlitSurface(question2.surface, NULL, ecran, &(question2.pos));
-SDL_Flip(ecran);
+
+//affichage des boutons
+BOUTONS lesboutons;
+lesboutons = placer_boutons(ecran, lesboutons);
 
 /******************************************************************/
 printf("\nVeux-tu recommencer une partie ? [o/n]\n\n");
