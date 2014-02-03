@@ -108,9 +108,9 @@ if (tempsActuel - tempsPrecedent > UT) {
 			variables.flag = 1;
 			variables.score++;
 			if (variables.score %5 == 0 && UT > 100) {
-				UT = UT - 50;
+				UT = UT - 40;
 				printf("score : %d ; unité de temps : %dms\n", variables.score, UT);
-				if (UT == 100) {
+				if (UT < 101) {
 					printf("\n///////////////////////////////\n//      VITESSE MAX !!!      //\n///////////////////////////////\n\n");
 				}
 			}
@@ -155,7 +155,7 @@ int pause(SDL_Surface* ecran) {
 	SDL_Flip(ecran);
 
 	while (reprend == 0) {
-		SDL_PollEvent(&event);
+		SDL_WaitEvent(&event);
 
 		switch (event.type) {
 			case SDL_QUIT:
