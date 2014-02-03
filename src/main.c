@@ -45,7 +45,7 @@ FILE* feuille_scores = NULL;
 SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
 SIZE = 70;
 N = 10;
-UT = 350;
+UT = 450;
 
 /*******************************************************************/
 		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE

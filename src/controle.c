@@ -93,6 +93,10 @@ if (tempsActuel - tempsPrecedent > UT) {
 			//on met un flag pour qu'il grandisse au prochain coup
 			variables.flag = 1;
 			variables.score++;
+			if (variables.score %5 == 0 && UT > 100) {
+				UT = UT - 50;
+				printf("unité de temps : %d\n", UT);
+			}
 		}
 
 		//on regarde s'il s'est pris un mur
