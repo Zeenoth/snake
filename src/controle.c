@@ -86,21 +86,8 @@ if (tempsActuel - tempsPrecedent > UT) {
 		bouge(&leserpent, lepois, variables);
 		variables.flag = 0;
 
-		//on regarde si le serpent a mangé la pomme
-		variables.mange = mange_pois(leserpent, lepois);
-		if (variables.mange == 1) {
-			lepois = init_pois(lepois, leserpent);
-			//on met un flag pour qu'il grandisse au prochain coup
-			variables.flag = 1;
-			variables.score++;
-			if (variables.score %5 == 0 && UT > 100) {
-				UT = UT - 50;
-				printf("score : %d ; unité de temps : %dms\n", variables.score, UT);
-			}
-		}
-
 		//on regarde s'il s'est pris un mur
-		variables.cogne = cogne_mur(leserpent, N, N);
+		variables.cogne = cogne_mur2(leserpent, N, N);
 		if (variables.cogne == 1) {
 			variables.partie_finie = 1;
 			variables.continuer = 0;
@@ -111,6 +98,22 @@ if (tempsActuel - tempsPrecedent > UT) {
 		if (variables.queue == 1) {
 			variables.partie_finie = 1;
 			variables.continuer = 0;
+		}
+
+		//on regarde si le serpent a mangé la pomme
+		variables.mange = mange_pois(leserpent, lepois);
+		if (variables.mange == 1) {
+			lepois = init_pois(lepois, leserpent);
+			//on met un flag pour qu'il grandisse au prochain coup
+			variables.flag = 1;
+			variables.score++;
+			if (variables.score %5 == 0 && UT > 100) {
+				UT = UT - 50;
+				printf("score : %d ; unité de temps : %dms\n", variables.score, UT);
+				if (UT == 100) {
+					printf("\n///////////////////////////////\n//      VITESSE MAX !!!      //\n///////////////////////////////\n\n");
+				}
+			}
 		}
 
                 rafraichir(ecran, corps, leserpent, pomme, lepois, &lescore, variables.score);

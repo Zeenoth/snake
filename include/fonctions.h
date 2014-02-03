@@ -40,6 +40,9 @@ void placer_pois(POIS* p, int H, int W);
 //fonction qui teste si le serpent s'est pris un mur. Retourne 1 si le serpent s'est cogné et 0 sinon
 int cogne_mur(SERPENT s, int H, int W);
 
+//fonction qui fait traverser les murs : le serpent réapparaît de l'autre côté de l'écran
+int cogne_mur2(SERPENT s, int H, int W);
+
 //affiche les coordonnées du pois
 void visualiser_pois(POIS p);
 

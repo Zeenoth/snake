@@ -52,6 +52,26 @@ int cogne_mur(SERPENT s, int H, int W) {
 	else return 0;
 }
 
+int cogne_mur2(SERPENT s, int H, int W) {
+	if (s->coord.abscisse < 0) {
+		s->coord.abscisse = N-1;
+	}
+
+	if (s->coord.abscisse > N-1) {
+		s->coord.abscisse = 0;
+	}
+
+	if (s->coord.ordonnee < 0) {
+		s->coord.ordonnee = N-1;
+	}
+
+	if (s->coord.ordonnee > N-1) {
+		s->coord.ordonnee = 0;
+	}
+
+	return 0;
+}
+
 void visualiser_pois(POIS p) {
 	printf("coordonnées du pois :\nabscisse %d, ordonnée %d\n", p.abscisse, p.ordonnee);
 }
