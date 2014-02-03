@@ -49,6 +49,18 @@ int clique_recommence(BOUTONS lesboutons) {
 				}
 				break;
 
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+					case SDLK_o:
+						choix = 1;
+						break;
+					case SDLK_n:
+						choix = 0;
+						break;
+
+					default: break;
+				}
+
 			default: break;
 		}
 	}

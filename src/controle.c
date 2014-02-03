@@ -95,7 +95,7 @@ if (tempsActuel - tempsPrecedent > UT) {
 			variables.score++;
 			if (variables.score %5 == 0 && UT > 100) {
 				UT = UT - 50;
-				printf("unité de temps : %d\n", UT);
+				printf("score : %d ; unité de temps : %dms\n", variables.score, UT);
 			}
 		}
 
