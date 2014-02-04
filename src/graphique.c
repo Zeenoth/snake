@@ -70,7 +70,60 @@ int clique_recommence(BOUTONS lesboutons) {
 					case SDLK_n:
 						choix = 0;
 						break;
+					case SDLK_RETURN:
+						choix = 1;
+						break;
+					case SDLK_KP_ENTER:
+						choix = 1;
+						break;
 
+					default: break;
+				}
+
+			default: break;
+		}
+	}
+
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
+
+	return choix;
+}
+
+int clique_ok(BOUTONS lesboutons) {
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_ENABLE);
+	
+	int choix = 14;
+	SDL_Event event;
+
+	while (choix == 14) {
+		SDL_WaitEvent(&event);
+		switch (event.type) {
+			case SDL_QUIT:
+				return -14;
+				break;
+				
+			case SDL_MOUSEBUTTONUP:
+				//pour valider le clic il faut que
+				//le bouton soit le gauche
+				//le curseur se trouve sur le bouton OK
+				if (event.button.button == SDL_BUTTON_LEFT &&
+					event.button.x > lesboutons.pos_oui.x && event.button.x < lesboutons.pos_oui.x + lesboutons.boutonoui->w &&
+					event.button.y > lesboutons.pos_oui.y && event.button.y < lesboutons.pos_oui.y + lesboutons.boutonoui->h)
+					{
+					choix = 0;
+				}
+				break;
+
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+					case SDLK_KP_ENTER:
+						choix = 0;
+						break;
+
+					case SDLK_RETURN:
+						choix = 0;
+						break;
+						
 					default: break;
 				}
 

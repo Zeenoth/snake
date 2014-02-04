@@ -39,5 +39,7 @@ BOUTONS placer1bouton(SDL_Surface* ecran, BOUTONS lebouton);
 //renvoie 1 si le joueur clique sur "oui", 0 s'il clique sur "non"
 int clique_recommence(BOUTONS lesboutons);
 
+//renvoie 0 si le joueur clique sur "OK"
+int clique_ok(BOUTONS lesboutons);
 
 #endif

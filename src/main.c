@@ -158,7 +158,9 @@ if (var.partie_finie == 1) {
 	* */
 	BOUTONS boutonok;
 	boutonok = placer1bouton(ecran, boutonok);
-	SDL_Delay(4000);
+//	SDL_Delay(4000);
+	while (clique_ok(boutonok) != 0 && clique_ok(boutonok) != -14) {
+	}
 }
 
 
