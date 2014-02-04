@@ -277,13 +277,28 @@ TEXTE positionner_texte(TEXTE montexte, int x, int y) {
 	return montexte;
 }
 
-void montre_scores(SDL_Surface* ecran, SCORE* t, char* police) {
+void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleur) {
+	printf("entrée dans affiche_scores\n");
 
+	TEXTE palmares;
+	palmares = creer_texte(palmares, police, 40, "Palmares :", couleur);
+	palmares = positionner_texte(palmares, floor(N*SIZE/2) - palmares.surface->w/2, floor(N*SIZE/8));
+	SDL_BlitSurface(palmares.surface, NULL, ecran, &(palmares.pos));
 
+	TEXTE tableau[10];	//tableau des dix scores à afficher (posision, joueur et points)
+	char numero[30];	//texte à mettre dans les TEXTE
+
+	int i = 0;
+	for (i = 0 ; i < 10 ; i++) {
+		snprintf(numero, 30, "%.2d %s : %d", i+1, t[i].player, t[i].resultat);
+		tableau[i] = creer_texte(tableau[i], police, 30, numero, couleur);
+		tableau[i] = positionner_texte(tableau[i], floor(N*SIZE/2) - tableau[i].surface->w/2, floor(N*SIZE*(i*0.5)/8 + N*SIZE/8 + 2*palmares.surface->h));
+		SDL_BlitSurface(tableau[i].surface, NULL, ecran, &(tableau[i].pos));
+	}
+
+	SDL_Flip(ecran);
 
 }
-
-
 
 
 

@@ -33,6 +33,9 @@ typedef struct {
 //place graphiquement les deux boutons "oui" et "non" à la fin de la partie
 BOUTONS placer_boutons(SDL_Surface* ecran, BOUTONS lesboutons);
 
+//place graphiquement le bouton "OK" en dessous du tableau des scores. La structures BOUTONS a été créée pour le fonction placer_boutons donc c'est pas très optimal
+BOUTONS placer1bouton(SDL_Surface* ecran, BOUTONS lebouton);
+
 //renvoie 1 si le joueur clique sur "oui", 0 s'il clique sur "non"
 int clique_recommence(BOUTONS lesboutons);
 

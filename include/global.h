@@ -14,9 +14,9 @@
 
 //la structure des scores
 typedef struct {
-	int position;
+	int position;		//classement dans la liste
 	char player[25];
-	int resultat;
+	int resultat;		//nombre de points obtenus
 } SCORE;
 
 int SIZE;	//taille d'une case

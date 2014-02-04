@@ -56,7 +56,7 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s);
 void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p);
 
 //affiche le tableau des scores dans la fenêtre graphique
-void montre_scores(SDL_Surface* ecran, SCORE* t, char* police);
+void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleur);
 
 //vérifie si la tête du serpent est sur la case du pois : renvoie 1 si le pois est atteint, 0 sinon
 int mange_pois(SERPENT s, POIS p);

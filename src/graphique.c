@@ -17,6 +17,19 @@ BOUTONS placer_boutons(SDL_Surface* ecran, BOUTONS lesboutons) {
 	return lesboutons;
 }
 
+BOUTONS placer1bouton(SDL_Surface* ecran, BOUTONS lebouton) {
+	printf("entrée dans placer1bouton\n");
+	
+	lebouton.boutonoui = IMG_Load("data/boutonok.png");
+	lebouton.pos_oui.x  = N*SIZE/2 - lebouton.boutonoui->w/2;
+	lebouton.pos_oui.y = N*SIZE/2;
+	SDL_BlitSurface(lebouton.boutonoui, NULL, ecran, &(lebouton.pos_oui));
+
+	SDL_Flip(ecran);
+
+	return lebouton;
+}
+
 int clique_recommence(BOUTONS lesboutons) {
 
 	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_ENABLE);

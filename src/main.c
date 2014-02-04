@@ -139,7 +139,7 @@ if (var.partie_finie == 1) {
 	char score_final[30];
 	snprintf(score_final, 30, "Ton score : %d", var.score);
 	resultat = creer_texte(resultat, "data/fibography.ttf", 35, score_final, noir);
-	resultat = positionner_texte(resultat, floor(N*SIZE/2 - resultat.surface->w/2), 0);
+	resultat = positionner_texte(resultat, floor(N*SIZE/2 - resultat.surface->w/2), 20);
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 	SDL_BlitSurface(resultat.surface, NULL, ecran, &(resultat.pos));
 	SDL_Flip(ecran);
@@ -152,11 +152,21 @@ if (var.partie_finie == 1) {
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
 	visualiser_scores(tableau);
+	affiche_scores(ecran, tableau, "data/fibography.ttf", noir);
 }
+
+/*on veut afficher un bouton "OK" à la fin des scores pour continuer
+ * on peut aussi appuyer sur entrée au clavier
+ * */
+ BOUTONS boutonok;
+boutonok = placer1bouton(ecran, boutonok);
+SDL_Delay(2000);
+
 /********************************************************************/
 
 /*ici, on veut afficher le texte "veux-tu recommencer une partie ?"
  * puis deux boutons, oui et non, sur lesquels on peut cliquer pour choisir
+ * on peut aussi appuyer sur o et n du clavier
  * */
 SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 

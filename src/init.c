@@ -58,6 +58,8 @@ SERPENT init_serpent(SERPENT le_serpent, int taille_serpent) {
 
 SCORE* init_scores() {
 	//printf("entrée dans init_scores\n");
+
+	/*Si tu changes la taille du tableau, il faudra aussi la changer dans la fonction affiche_scores ! */
 	
 	SCORE* t = calloc(10,sizeof(SCORE));
 
