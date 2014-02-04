@@ -160,15 +160,21 @@ if (var.partie_finie == 1) {
  * */
 SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 
-//affichage de la question 
+//affichage de la question et du score final
+TEXTE final;
 TEXTE question1;
 TEXTE question2;
 question1 = creer_texte(question1, "data/alphawood.ttf", 50, "Veux tu recommencer", noir);
 question2 = creer_texte(question2, "data/alphawood.ttf", 50, "une partie ?", noir);
+char score_final[30];
+snprintf(score_final, 30, "Ton score : %d", var.score);
+final = creer_texte(final, "data/Fibography_PersonalUse.ttf", 50, score_final, noir);
 question1 = positionner_texte(question1, floor(N*SIZE/2 - question1.surface->w/2), floor(N*SIZE/4));
 question2 = positionner_texte(question2, floor(N*SIZE/2 - question2.surface->w/2), floor(N*SIZE/4) + 50);
+final = positionner_texte(final, floor(N*SIZE/2) - final.surface->w/2, floor(N*SIZE/8));
 SDL_BlitSurface(question1.surface, NULL, ecran, &(question1.pos));
 SDL_BlitSurface(question2.surface, NULL, ecran, &(question2.pos));
+SDL_BlitSurface(final.surface, NULL, ecran, &(final.pos));
 
 //affichage des boutons
 BOUTONS lesboutons;

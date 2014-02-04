@@ -277,7 +277,11 @@ TEXTE positionner_texte(TEXTE montexte, int x, int y) {
 	return montexte;
 }
 
+void montre_scores(SDL_Surface* ecran, SCORE* t, char* police) {
 
+
+
+}
 
 
 

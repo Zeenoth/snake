@@ -55,6 +55,9 @@ void affiche_serpent(SDL_Surface* ecran, SDL_Surface* sprite, SERPENT s);
 //affiche le pois dans la fenêtre graphique
 void affiche_pois(SDL_Surface* ecran, SDL_Surface* sprite, POIS p);
 
+//affiche le tableau des scores dans la fenêtre graphique
+void montre_scores(SDL_Surface* ecran, SCORE* t, char* police);
+
 //vérifie si la tête du serpent est sur la case du pois : renvoie 1 si le pois est atteint, 0 sinon
 int mange_pois(SERPENT s, POIS p);
 
@@ -72,5 +75,6 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 //x et y sont l'abscisse et l'ordonnée du coin supérieur gauche de l'étiquette contenant le texte.
 TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
 TEXTE positionner_texte(TEXTE montexte, int x, int y);
+
 
 #endif
