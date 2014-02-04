@@ -153,14 +153,15 @@ if (var.partie_finie == 1) {
 	}
 	visualiser_scores(tableau);
 	affiche_scores(ecran, tableau, "data/fibography.ttf", noir);
+	/*on veut afficher un bouton "OK" à la fin des scores pour continuer
+	* on peut aussi appuyer sur entrée au clavier
+	* */
+	BOUTONS boutonok;
+	boutonok = placer1bouton(ecran, boutonok);
+	SDL_Delay(4000);
 }
 
-/*on veut afficher un bouton "OK" à la fin des scores pour continuer
- * on peut aussi appuyer sur entrée au clavier
- * */
- BOUTONS boutonok;
-boutonok = placer1bouton(ecran, boutonok);
-SDL_Delay(2000);
+
 
 /********************************************************************/
 

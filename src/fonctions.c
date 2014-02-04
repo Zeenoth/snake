@@ -292,7 +292,7 @@ void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleu
 	for (i = 0 ; i < 10 ; i++) {
 		snprintf(numero, 30, "%.2d %s : %d", i+1, t[i].player, t[i].resultat);
 		tableau[i] = creer_texte(tableau[i], police, 30, numero, couleur);
-		tableau[i] = positionner_texte(tableau[i], floor(N*SIZE/2) - tableau[i].surface->w/2, floor(N*SIZE*(i*0.5)/8 + N*SIZE/8 + 2*palmares.surface->h));
+		tableau[i] = positionner_texte(tableau[i], floor(N*SIZE/2) - tableau[i].surface->w/2, floor(N*SIZE*(i*0.4)/8 + N*SIZE/8 + 2*palmares.surface->h));
 		SDL_BlitSurface(tableau[i].surface, NULL, ecran, &(tableau[i].pos));
 	}
 
