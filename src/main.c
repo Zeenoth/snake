@@ -147,11 +147,11 @@ if (var.partie_finie == 1) {
 	tableau = charge_scores(feuille_scores, tableau);
 	int classement = merite(var.score, tableau);
 	if (classement < 11) {
-		printf("\nTon score : %d\n", var.score);
-		printf("\nta position : %d\n", classement);
+		//printf("\nTon score : %d\n", var.score);
+		//printf("\nta position : %d\n", classement);
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
-	visualiser_scores(tableau);
+	//visualiser_scores(tableau);
 	affiche_scores(ecran, tableau, "data/fibography.ttf", noir);
 	/*on veut afficher un bouton "OK" à la fin des scores pour continuer
 	* on peut aussi appuyer sur entrée au clavier
@@ -177,7 +177,7 @@ SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 TEXTE final;
 TEXTE question1;
 TEXTE question2;
-question1 = creer_texte(question1, "data/alphawood.ttf", 50, "Veux tu recommencer", noir);
+question1 = creer_texte(question1, "data/alphawood.ttf", 50, "Veux tu refaire", noir);
 question2 = creer_texte(question2, "data/alphawood.ttf", 50, "une partie ?", noir);
 char score_final[30];
 snprintf(score_final, 30, "Ton score : %d", var.score);

@@ -15,6 +15,7 @@ Avant d'entrer dans la boucle principale, plusieurs initialisations sont effectu
 	création du serpent. Il fait taille_serpent=3 cases. Il est positionné horizontalement, la queue au centre de l'écran.
 	création du pois. Sa position est aléatoire mais il ne peut pas se trouver là où il y a déjà le serpent.
 Ces fonctions sont dans le module init.h/init.c.
+	affichage des instructions.
 
 Les structures sont définies dans le fichier liste.h :
 	COORDONNEES contient une abscisse et une ordonnée, exprimées en nombre de cases et non en pixels

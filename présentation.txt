@@ -135,14 +135,14 @@ Ouvrir une fenêtre graphique
 La remplir en blanc ou avec une image de fond (photo de pelouse par exemple)
 
 		OPTIMISATIONS
-Définir par énumération DROITE, GAUCHE, HAUT, BAS pour la direction du serpent
-Enregistrement des meilleurs scores et noms des joueurs dans un fichier texte
-Possibilité de mettre le jeu en pause (dans la fonction sur le contrôle du serpent)
+	Définir par énumération DROITE, GAUCHE, HAUT, BAS pour la direction du serpent
+	Enregistrement des meilleurs scores et noms des joueurs dans un fichier texte
+	Possibilité de mettre le jeu en pause (dans la fonction sur le contrôle du serpent)
 Faire des maps avec des murs à éviter
 Jouer un son lorsque le serpent mange le pois
 Jouer un son lorsque le serpent se cogne
-Possibilité de revenir de l'autre côté de l'écran quand on va dans un bord de l'écran
-La vitesse du jeu augmente avec la longueur du serpent
+	Possibilité de revenir de l'autre côté de l'écran quand on va dans un bord de l'écran
+	La vitesse du jeu augmente avec la longueur du serpent
 Faire des sprites différents pour la tête, la queue, suivant la direction, et les segments du corps aussi (si très motivée)
 
 

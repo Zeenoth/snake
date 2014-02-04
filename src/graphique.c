@@ -70,6 +70,9 @@ int clique_recommence(BOUTONS lesboutons) {
 					case SDLK_n:
 						choix = 0;
 						break;
+					case SDLK_BACKSPACE:
+						choix = 0;
+						break;
 					case SDLK_RETURN:
 						choix = 1;
 						break;
