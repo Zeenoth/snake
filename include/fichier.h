@@ -17,7 +17,7 @@
 SCORE* charge_scores(FILE* fichier, SCORE* tab);
 
 //affiche dans le terminal les meilleurs scores
-int affiche_scores(SCORE* t);
+int visualiser_scores(SCORE* t);
 
 //regarde si le joueur fait partie des meilleurs ; renvoie le classement du joueur
 int merite(int s, SCORE* t);

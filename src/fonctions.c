@@ -243,7 +243,7 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	char score_courant[30];
 	snprintf(score_courant, 30, "Score : %d", score_num);
 	SDL_Color noir = {0, 0, 0};
-	*lescore = creer_texte(*lescore, "data/Fibography_PersonalUse.ttf", 24, score_courant, noir);
+	*lescore = creer_texte(*lescore, "data/fibography.ttf", 24, score_courant, noir);
 	*lescore = positionner_texte(*lescore, floor(N*SIZE - lescore->surface->w), 0);
      
 	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */
@@ -260,7 +260,7 @@ TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_
 	montexte.font = TTF_OpenFont(mapolice, taille);
 	if (montexte.font == NULL) {
 		printf("%s\n", TTF_GetError());
-		exit(0);
+		//exit(0);
 	}
 	
 	montexte.color = couleur;

@@ -37,7 +37,7 @@ SCORE* charge_scores(FILE* fichier, SCORE* tab) {
 	return tab;
 }
 
-int affiche_scores(SCORE* t) {
+int visualiser_scores(SCORE* t) {
 	int i;
 	FILE* fichier = NULL;
 	
