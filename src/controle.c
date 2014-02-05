@@ -6,6 +6,7 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
         int tempsPrecedent = 0;
         int tempsActuel = 0;
         int retour = 0; //drapeau pour éviter que deux appuis différents sur des flèches pendant la même UT ne fassent perdre
+	DIRECTION dir = leserpent->direction;
         
 	//fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
 	//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
@@ -48,28 +49,28 @@ VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surfa
 						break;
                                         
                                         case SDLK_UP:
-                                                if (leserpent->direction != bas && retour == 0) {
+                                                if (dir != bas) {
                                                         leserpent->direction = haut;
                                                 }
                                                 else {retour =1;}
                                                 break;
 
                                         case SDLK_DOWN:
-                                                if (leserpent->direction != haut && retour == 0) {
+                                                if (dir != haut) {
                                                         leserpent->direction = bas;
                                                 }
                                                 else {retour = 1;}
                                                 break;
 
                                         case SDLK_RIGHT:
-                                                if (leserpent->direction != gauche) {
+                                                if (dir != gauche) {
                                                         leserpent->direction = droite;                                                              
                                                 }
                                                 else {retour = 1;}
                                                 break;
 
                                         case SDLK_LEFT:
-                                                if (leserpent->direction != droite && retour == 0) {
+                                                if (dir != droite) {
                                                         leserpent->direction = gauche;
                                                 }
                                                 else {retour = 1;}
@@ -119,9 +120,9 @@ if (tempsActuel - tempsPrecedent > UT) {
                 rafraichir(ecran, corps, leserpent, pomme, lepois, &lescore, variables.score);
                 
 tempsPrecedent = tempsActuel;
+dir = leserpent->direction;
 }
 else {
-	retour = 0;
 }
 
         } //fin du while
