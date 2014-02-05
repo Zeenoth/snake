@@ -243,7 +243,7 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	char score_courant[30];
 	snprintf(score_courant, 30, "Score : %d", score_num);
 	SDL_Color noir = {0, 0, 0};
-	*lescore = creer_texte(*lescore, "data/fibography.ttf", 24, score_courant, noir);
+	*lescore = creer_texte(*lescore, "data/moonflowerbold.ttf", 34, score_courant, noir);
 	*lescore = positionner_texte(*lescore, floor(N*SIZE - lescore->surface->w), 0);
      
 	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */
@@ -281,7 +281,7 @@ void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleu
 	printf("entrée dans affiche_scores\n");
 
 	TEXTE palmares;
-	palmares = creer_texte(palmares, police, 40, "Palmares :", couleur);
+	palmares = creer_texte(palmares, police, 47, "Palmares :", couleur);
 	palmares = positionner_texte(palmares, floor(N*SIZE/2) - palmares.surface->w/2, floor(N*SIZE/8));
 	SDL_BlitSurface(palmares.surface, NULL, ecran, &(palmares.pos));
 
@@ -292,7 +292,7 @@ void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleu
 	for (i = 0 ; i < 10 ; i++) {
 		snprintf(numero, 30, "%.2d %s : %d", i+1, t[i].player, t[i].resultat);
 		tableau[i] = creer_texte(tableau[i], police, 30, numero, couleur);
-		tableau[i] = positionner_texte(tableau[i], floor(N*SIZE/2) - tableau[i].surface->w/2, floor(N*SIZE*(i*0.4)/8 + N*SIZE/8 + 2*palmares.surface->h));
+		tableau[i] = positionner_texte(tableau[i], floor(N*SIZE/2) - tableau[i].surface->w/2, floor(N*SIZE*(i*0.4)/8 + N*SIZE*0.7/8 + 2*palmares.surface->h));
 		SDL_BlitSurface(tableau[i].surface, NULL, ecran, &(tableau[i].pos));
 	}
 

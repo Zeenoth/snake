@@ -99,7 +99,7 @@ info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*4/5);
 TEXTE lescore;
 char score_courant[30];
 snprintf(score_courant, 30, "Score : %d", var.score);
-lescore = creer_texte(lescore, "data/fibography.ttf", 24, score_courant, noir);
+lescore = creer_texte(lescore, "data/moonflowerbold.ttf", 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
 printf("\nFIN DE L'INITIALISATION\n\n");
@@ -138,7 +138,7 @@ if (var.partie_finie == 1) {
 	TEXTE resultat;
 	char score_final[30];
 	snprintf(score_final, 30, "Ton score : %d", var.score);
-	resultat = creer_texte(resultat, "data/fibography.ttf", 35, score_final, noir);
+	resultat = creer_texte(resultat, "data/moonflowerbold.ttf", 35, score_final, noir);
 	resultat = positionner_texte(resultat, floor(N*SIZE/2 - resultat.surface->w/2), 20);
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 	SDL_BlitSurface(resultat.surface, NULL, ecran, &(resultat.pos));
@@ -152,7 +152,8 @@ if (var.partie_finie == 1) {
 		ecrit_score(classement, var.score, feuille_scores, tableau);
 	}
 	//visualiser_scores(tableau);
-	affiche_scores(ecran, tableau, "data/fibography.ttf", noir);
+	tableau  = charge_scores(feuille_scores, tableau);
+	affiche_scores(ecran, tableau, "data/moonflowerbold.ttf", noir);
 	/*on veut afficher un bouton "OK" à la fin des scores pour continuer
 	* on peut aussi appuyer sur entrée au clavier
 	* */
@@ -181,7 +182,7 @@ question1 = creer_texte(question1, "data/alphawood.ttf", 50, "Veux tu refaire", 
 question2 = creer_texte(question2, "data/alphawood.ttf", 50, "une partie ?", noir);
 char score_final[30];
 snprintf(score_final, 30, "Ton score : %d", var.score);
-final = creer_texte(final, "data/fibography.ttf", 50, score_final, noir);
+final = creer_texte(final, "data/moonflowerbold.ttf", 50, score_final, noir);
 question1 = positionner_texte(question1, floor(N*SIZE/2 - question1.surface->w/2), floor(N*SIZE/4));
 question2 = positionner_texte(question2, floor(N*SIZE/2 - question2.surface->w/2), floor(N*SIZE/4) + 50);
 final = positionner_texte(final, floor(N*SIZE/2) - final.surface->w/2, floor(N*SIZE/8));
