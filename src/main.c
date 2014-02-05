@@ -20,15 +20,84 @@
 
 int main(int argc, char* argv[]) {
 
+SIZE = 70;
+N = 10;
+UT = 450;
 int nouvelle_partie = 1;
-
-while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
+SDL_Color noir = {0, 0, 0};
+SDL_Color rose = {193, 106, 106};
 
 //on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
 	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);	
+
+/******************************************************************/
+		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
+
+SDL_Surface* ecran = NULL;
+int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
+ecran = init_SDL(ecran, taille_fenetre);
+
+/******************************************************************/
+
+/*C'est ici qu'on propose les différents modes de jeu :
+ * normal
+ * avec les bords de l'écran
+ * multijoueur...
+ * il faut afficher les différents choix
+ * considérer les zones de texte comme des boutons pour que le joueur clique dessus
+ * il faudrait aussi qu'on puisse les sélectionner grâce au clavier : l'option sélectionnée apparaîtrait plus gros
+ * */
+
+TEXTE titre;
+titre = creer_texte(titre, "data/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
+titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/6));
+
+TEXTE modeLibre;
+modeLibre = creer_texte(modeLibre, "data/alphawood.ttf", 60, "Mode sans bords", rose);
+modeLibre = positionner_texte(modeLibre, floor(N*SIZE/2 - modeLibre.surface->w/2), floor(N*SIZE/4) + 1.3*titre.surface->h);
+
+TEXTE modeNormal;
+modeNormal = creer_texte(modeNormal, "data/alphawood.ttf", 60, "Mode normal", noir);
+modeNormal = positionner_texte(modeNormal, floor(N*SIZE/2 - modeNormal.surface->w/2), modeLibre.pos.y + 1.3*modeLibre.surface->h);
+
+TEXTE modeMulti;
+modeMulti = creer_texte(modeMulti, "data/alphawood.ttf", 60, "Mode multijoueur", noir);
+modeMulti = positionner_texte(modeMulti, floor(N*SIZE/2 - modeMulti.surface->w/2), modeNormal.pos.y + 1.3*modeNormal.surface->h);
+
+TEXTE modeAutre;
+modeAutre = creer_texte(modeAutre, "data/alphawood.ttf", 60, "autre mode", noir);
+modeAutre = positionner_texte(modeAutre, floor(N*SIZE/2 - modeAutre.surface->w/2), modeMulti.pos.y + 1.3*modeMulti.surface->h);
+
+SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
+SDL_BlitSurface(modeLibre.surface, NULL, ecran, &(modeLibre.pos));
+SDL_BlitSurface(modeNormal.surface, NULL, ecran, &(modeNormal.pos));
+SDL_BlitSurface(modeMulti.surface, NULL, ecran, &(modeMulti.pos));
+SDL_BlitSurface(modeAutre.surface, NULL, ecran, &(modeAutre.pos));
+
+SDL_Flip(ecran);
+
+//choix :
+int jaichoisi = 0;
+int lechoix = 1; //par défaut c'est le mode sans bords qui est sélectionné
+/*Si le joueur appuie sur haut, choix--
+ * si choix<1 alors choix=dernière possibilité
+ * la fonction renvoie le numéro du choix dès que le joueur appuie sur haut ou bas
+ * il faut alors actualiser l'affichage pour que le choix apparaisse en couleur
+ * si on a validé son choix, jaichoisi va prendre la valeur 1 et on lance le programme principal
+ * */
+while (jaichoisi == 0) {
+	lechoix = clique_menu(&jaichoisi, lechoix);
+	printf("choix : %d\n", lechoix);
+	if (lechoix == -14) {
+		goto quitter_programme;
+	}
+}
+SDL_Delay(1000);
+
+while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
 
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
@@ -43,18 +112,9 @@ var.cogne = 0; //s'il se cogne contre un mur
 var.queue = 0; //s'il se mord la queue
 FILE* feuille_scores = NULL;
 SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
-SIZE = 70;
-N = 10;
-UT = 450;
+
 
 /*******************************************************************/
-		//INITIALISATION DE LA SDL ET CRÉATION DE LA FENÊTRE
-
-SDL_Surface* ecran = NULL;
-int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
-ecran = init_SDL(ecran, taille_fenetre);
-
-/******************************************************************/
 		//CRÉATION DU SERPENT
 
 //taille initiale du serpent
@@ -72,7 +132,6 @@ POIS lepois;
 lepois = init_pois(lepois, leserpent);
 //visualiser_pois(lepois);
 
-
 /*******************************************************************/
 //chargement des sprites
 SDL_Surface* pomme = NULL;
@@ -82,11 +141,6 @@ SDL_Surface* tete = NULL;
 tete = IMG_Load("data/corps.png");
 
 //chargement des textes à afficher
-SDL_Color noir = {0, 0, 0};
-
-TEXTE titre;
-titre = creer_texte(titre, "data/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
-titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/4));
 
 TEXTE instructions;
 instructions = creer_texte(instructions, "data/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
@@ -203,7 +257,10 @@ else {
 
 } //fin du while(nouvelle partie)
 
+quitter_programme:
 printf("\nAu revoir!\n\n");
+
+//faire tous les free() nécessaires : polices, surfaces, etc
 
 return 0;
 }
