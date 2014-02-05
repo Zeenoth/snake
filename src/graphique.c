@@ -159,7 +159,8 @@ int clique_menu(int* jaichoisi, int choix) {
 		SDL_WaitEvent(&event);
 		switch (event.type) {
 			case SDL_QUIT:
-				return -14;
+				*jaichoisi = -14;
+				continuer = 0;
 				break;
 				
 			/*case SDL_MOUSEBUTTONUP:
@@ -176,23 +177,29 @@ int clique_menu(int* jaichoisi, int choix) {
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym) {
 					case SDLK_ESCAPE:
-						return -14;
+						*jaichoisi = -14;
+						continuer = 0;
 						break;
 						
 					case SDLK_KP_ENTER:
-						*jaichoisi = 1; //car par défaut c'est le choix 1 qui est sélectionné
+						*jaichoisi = 1;
 						continuer = 0;
+						printf("%d\n", *jaichoisi);
+						break;
+
+					case SDLK_RETURN:
+						*jaichoisi = 1;
+						continuer = 0;
+						printf("%d\n", *jaichoisi);
 						break;
 
 					case SDLK_UP:
 						choix--;
-						printf("haut\n");
 						continuer = 0;
 						break;
 
 					case SDLK_DOWN:
 						choix++;
-						printf("bas\n");
 						continuer = 0;
 						break;
 						
@@ -213,3 +220,11 @@ int clique_menu(int* jaichoisi, int choix) {
 
 	return choix;
 }
+
+
+
+
+
+
+
+

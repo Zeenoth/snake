@@ -48,4 +48,6 @@ int clique_ok(BOUTONS lesboutons);
 int clique_menu(int* jaichoisi, int choix);
 
 
+
+
 #endif

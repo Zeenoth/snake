@@ -51,51 +51,57 @@ ecran = init_SDL(ecran, taille_fenetre);
  * il faudrait aussi qu'on puisse les sélectionner grâce au clavier : l'option sélectionnée apparaîtrait plus gros
  * */
 
-TEXTE titre;
-titre = creer_texte(titre, "data/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
-titre = positionner_texte(titre, floor(N*SIZE/2 - titre.surface->w/2), floor(N*SIZE/6));
+TEXTE modes[5];	//tableau des zones de textes des modes de jeu
 
-TEXTE modeLibre;
-modeLibre = creer_texte(modeLibre, "data/alphawood.ttf", 60, "Mode sans bords", rose);
-modeLibre = positionner_texte(modeLibre, floor(N*SIZE/2 - modeLibre.surface->w/2), floor(N*SIZE/4) + 1.3*titre.surface->h);
+//titre
+modes[0] = creer_texte(modes[0], "data/alphawood.ttf", 75, "Bienvenue dans Snake", noir);
+modes[0] = positionner_texte(modes[0], floor(N*SIZE/2 - modes[0].surface->w/2), floor(N*SIZE/6));
 
-TEXTE modeNormal;
-modeNormal = creer_texte(modeNormal, "data/alphawood.ttf", 60, "Mode normal", noir);
-modeNormal = positionner_texte(modeNormal, floor(N*SIZE/2 - modeNormal.surface->w/2), modeLibre.pos.y + 1.3*modeLibre.surface->h);
+//mode sans bords
+modes[1] = creer_texte(modes[1], "data/alphawood.ttf", 60, "Mode sans bords", noir);
+modes[1] = positionner_texte(modes[1], floor(N*SIZE/2 - modes[1].surface->w/2), floor(N*SIZE/4) + 1.3*modes[0].surface->h);
 
-TEXTE modeMulti;
-modeMulti = creer_texte(modeMulti, "data/alphawood.ttf", 60, "Mode multijoueur", noir);
-modeMulti = positionner_texte(modeMulti, floor(N*SIZE/2 - modeMulti.surface->w/2), modeNormal.pos.y + 1.3*modeNormal.surface->h);
+//mode avec les bords de l'écran
+modes[2] = creer_texte(modes[2], "data/alphawood.ttf", 60, "Mode normal", noir);
+modes[2] = positionner_texte(modes[2], floor(N*SIZE/2 - modes[2].surface->w/2), modes[1].pos.y + 1.3*modes[1].surface->h);
 
-TEXTE modeAutre;
-modeAutre = creer_texte(modeAutre, "data/alphawood.ttf", 60, "autre mode", noir);
-modeAutre = positionner_texte(modeAutre, floor(N*SIZE/2 - modeAutre.surface->w/2), modeMulti.pos.y + 1.3*modeMulti.surface->h);
+//mode de jeu à deux joueurs
+modes[3] = creer_texte(modes[3], "data/alphawood.ttf", 60, "Mode multijoueur", noir);
+modes[3] = positionner_texte(modes[3], floor(N*SIZE/2 - modes[3].surface->w/2), modes[2].pos.y + 1.3*modes[2].surface->h);
 
-SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
-SDL_BlitSurface(modeLibre.surface, NULL, ecran, &(modeLibre.pos));
-SDL_BlitSurface(modeNormal.surface, NULL, ecran, &(modeNormal.pos));
-SDL_BlitSurface(modeMulti.surface, NULL, ecran, &(modeMulti.pos));
-SDL_BlitSurface(modeAutre.surface, NULL, ecran, &(modeAutre.pos));
+//possibilité d'inventer un autre mode de jeu
+modes[4] = creer_texte(modes[4], "data/alphawood.ttf", 60, "autre mode", noir);
+modes[4] = positionner_texte(modes[4], floor(N*SIZE/2 - modes[4].surface->w/2), modes[3].pos.y + 1.3*modes[3].surface->h);
+
+//curseur montrant le choix sélectionné
+TEXTE curseur;
+curseur = creer_texte(curseur, "data/ubuntu.ttf", 60, "=>", rose);
+curseur = positionner_texte(curseur, floor(modes[1].pos.x - curseur.surface->w), floor(modes[1].pos.y));
+
+SDL_BlitSurface(modes[0].surface, NULL, ecran, &(modes[0].pos));
+SDL_BlitSurface(modes[1].surface, NULL, ecran, &(modes[1].pos));
+SDL_BlitSurface(modes[2].surface, NULL, ecran, &(modes[2].pos));
+SDL_BlitSurface(modes[3].surface, NULL, ecran, &(modes[3].pos));
+SDL_BlitSurface(modes[4].surface, NULL, ecran, &(modes[4].pos));
+SDL_BlitSurface(curseur.surface, NULL, ecran, &(curseur.pos));
 
 SDL_Flip(ecran);
 
 //choix :
-int jaichoisi = 0;
-int lechoix = 1; //par défaut c'est le mode sans bords qui est sélectionné
+int lechoix = 1;	//par défaut c'est le mode sans bords qui est sélectionné
+
+
 /*Si le joueur appuie sur haut, choix--
  * si choix<1 alors choix=dernière possibilité
  * la fonction renvoie le numéro du choix dès que le joueur appuie sur haut ou bas
  * il faut alors actualiser l'affichage pour que le choix apparaisse en couleur
  * si on a validé son choix, jaichoisi va prendre la valeur 1 et on lance le programme principal
  * */
-while (jaichoisi == 0) {
-	lechoix = clique_menu(&jaichoisi, lechoix);
-	printf("choix : %d\n", lechoix);
-	if (lechoix == -14) {
-		goto quitter_programme;
-	}
+lechoix = choisir_mode(lechoix, ecran, curseur, modes);
+if (lechoix == -14) {
+	goto quitter_programme;
 }
-SDL_Delay(1000);
+printf("c'est choisi !\n");
 
 while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
 
@@ -144,7 +150,7 @@ tete = IMG_Load("data/corps.png");
 
 TEXTE instructions;
 instructions = creer_texte(instructions, "data/alphawood.ttf", 35, "Appuie sur une touche pour commencer", noir);
-instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), titre.pos.y + 1.5*SIZE);
+instructions = positionner_texte(instructions, floor(N*SIZE/2 - instructions.surface->w/2), modes[0].pos.y + 1.5*SIZE);
 
 TEXTE info;
 info = creer_texte(info, "data/alphawood.ttf", 35, "Appuie sur P pour mettre en pause", noir);
@@ -162,7 +168,7 @@ printf("\nFIN DE L'INITIALISATION\n\n");
 		//BOUCLE DU PROGRAMME PRINCIPAL
 
 rafraichir(ecran, tete, leserpent, pomme, lepois, &lescore, var.score);
-SDL_BlitSurface(titre.surface, NULL, ecran, &(titre.pos));
+SDL_BlitSurface(modes[0].surface, NULL, ecran, &(modes[0].pos));
 SDL_BlitSurface(instructions.surface, NULL, ecran, &(instructions.pos));
 SDL_BlitSurface(lescore.surface, NULL, ecran, &(lescore.pos));
 SDL_BlitSurface(info.surface, NULL, ecran, &(info.pos));

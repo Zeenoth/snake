@@ -300,10 +300,34 @@ void affiche_scores(SDL_Surface* ecran, SCORE* t, char* police, SDL_Color couleu
 
 }
 
+int choisir_mode(int lechoix, SDL_Surface* ecran, TEXTE curseur, TEXTE* modes) {
+	int jaichoisi = 0;
 
-
-
-
+	while (jaichoisi == 0) {
+		lechoix = clique_menu(&jaichoisi, lechoix);
+		printf("numero %d \n",lechoix);
+	
+		//printf("coloriage en blanc de la fenêtre graphique\n");
+		Uint32 blanc = SDL_MapRGB(ecran->format, 255, 255, 255);
+		SDL_FillRect(ecran, NULL, blanc);
+	
+		int i;
+		for (i=0 ; i<5 ; i++) {
+			if (i == lechoix) { //on affiche le curseur devant
+				curseur = positionner_texte(curseur, floor(modes[i].pos.x - curseur.surface->w), floor(modes[i].pos.y));	
+				SDL_BlitSurface(curseur.surface, NULL, ecran, &(curseur.pos));
+			}		
+			SDL_BlitSurface(modes[i].surface, NULL, ecran, &(modes[i].pos));
+		}
+		SDL_Flip(ecran);
+		if (jaichoisi == -14) {
+			//goto quitter_programme;
+			return -14;
+		}	
+	}
+	
+	return lechoix;
+}
 
 
 
