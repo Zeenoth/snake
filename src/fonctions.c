@@ -243,7 +243,7 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	char score_courant[30];
 	snprintf(score_courant, 30, "Score : %d", score_num);
 	SDL_Color noir = {0, 0, 0};
-	*lescore = creer_texte(*lescore, "data/moonflowerbold.ttf", 34, score_courant, noir);
+	*lescore = creer_texte(*lescore, "/home/sophie/Bureau/snake/data/moonflowerbold.ttf", 34, score_courant, noir);
 	*lescore = positionner_texte(*lescore, floor(N*SIZE - lescore->surface->w), 0);
      
 	/* On fait tous les SDL_BlitSurface nécessaires pour coller les surfaces à l'écran */
@@ -255,7 +255,22 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 	SDL_Flip(ecran);
 }
 
-TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur) {
+TEXTE creer_texte(TEXTE montexte, char* mapolice, int taille, char* message, SDL_Color couleur) {
+	//printf("entrée dans creer_texte\n");
+	montexte.font = TTF_OpenFont(mapolice, taille);
+	if (montexte.font == NULL) {
+		printf("%s\n", TTF_GetError());
+		//creer_texte(montexte, "data/ubuntu.ttf", taille, message, couleur);
+		//exit(0);
+	}
+	
+	montexte.color = couleur;
+	montexte.surface = TTF_RenderText_Blended(montexte.font, message, montexte.color);
+	
+	return montexte;
+}
+
+TEXTE creer_texte_rapide(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur) {
 	//printf("entrée dans creer_texte\n");
 	montexte.font = TTF_OpenFont(mapolice, taille);
 	if (montexte.font == NULL) {
@@ -264,7 +279,7 @@ TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_
 	}
 	
 	montexte.color = couleur;
-	montexte.surface = TTF_RenderText_Blended(montexte.font, message, montexte.color);
+	montexte.surface = TTF_RenderText_Solid(montexte.font, message, montexte.color);
 	
 	return montexte;
 }

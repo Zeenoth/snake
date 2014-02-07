@@ -21,7 +21,7 @@ typedef struct {
 
 int SIZE;	//taille d'une case
 int N;		//nombre de cases du tableau
-int UT;		//base de temps en ms
+int UT;		//base de temps en ms ; 450 est une bonne valeur pour commencer la partie
 
 
 #endif

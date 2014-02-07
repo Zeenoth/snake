@@ -22,7 +22,6 @@ int main(int argc, char* argv[]) {
 
 SIZE = 70;
 N = 10;
-UT = 450;
 int nouvelle_partie = 1;
 SDL_Color noir = {0, 0, 0};
 SDL_Color rose = {193, 106, 106};
@@ -41,6 +40,8 @@ int taille_fenetre = SIZE*N; //taille de la fenêtre en pixels
 ecran = init_SDL(ecran, taille_fenetre);
 
 /******************************************************************/
+while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
+SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 
 /*C'est ici qu'on propose les différents modes de jeu :
  * normal
@@ -90,7 +91,6 @@ SDL_Flip(ecran);
 //choix :
 int lechoix = 1;	//par défaut c'est le mode sans bords qui est sélectionné
 
-
 /*Si le joueur appuie sur haut, choix--
  * si choix<1 alors choix=dernière possibilité
  * la fonction renvoie le numéro du choix dès que le joueur appuie sur haut ou bas
@@ -103,11 +103,12 @@ if (lechoix == -14) {
 }
 printf("c'est choisi !\n");
 
-while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
+//while (nouvelle_partie) { //on peut choisir de recommencer quand on a perdu
 
 /******************************************************************/
 		//VARIABLES UTILES POUR LE PROGRAMME
 
+UT = 450;
 VARIABLES var;
 var.partie_finie = 0; //vaut 0 tant que le joueur n'a pas perdu ni quitté le jeu, 1 sinon
 var.score = 0; //compte le nombre de pois mangés par le serpent
@@ -116,6 +117,7 @@ var.mange = 0; //s"il mange le pois
 var.flag = 0;
 var.cogne = 0; //s'il se cogne contre un mur
 var.queue = 0; //s'il se mord la queue
+var.mode = lechoix;
 FILE* feuille_scores = NULL;
 SCORE* tableau = init_scores(); //alloue et initialise le tableau des scores
 
@@ -267,6 +269,8 @@ quitter_programme:
 printf("\nAu revoir!\n\n");
 
 //faire tous les free() nécessaires : polices, surfaces, etc
+
+TTF_Quit();
 
 return 0;
 }

@@ -1,7 +1,7 @@
 #include "../include/controle.h"
 
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables, TEXTE lescore) {
-
+int raf = 0; //compte combien de fois on rafraîchit l'écran avant que ça plante
         SDL_Event event;
         int tempsPrecedent = 0;
         int tempsActuel = 0;
@@ -88,7 +88,16 @@ if (tempsActuel - tempsPrecedent > UT) {
 		variables.flag = 0;
 
 		//on regarde s'il s'est pris un mur
-		variables.cogne = cogne_mur2(leserpent, N, N);
+
+		//en mode sans bords : variables.mode = 1;
+		if (variables.mode == 1) {	
+			variables.cogne = cogne_mur2(leserpent, N, N);
+		}
+		// mode avec les murs : variables.mmode = 2;
+		if (variables.mode == 2) {
+			variables.cogne = cogne_mur(leserpent, N, N);
+		}
+		
 		if (variables.cogne == 1) {
 			variables.partie_finie = 1;
 			variables.continuer = 0;
@@ -108,16 +117,18 @@ if (tempsActuel - tempsPrecedent > UT) {
 			//on met un flag pour qu'il grandisse au prochain coup
 			variables.flag = 1;
 			variables.score++;
-			if (variables.score %5 == 0 && UT > 100) {
+			if (variables.score %5 == 0 && UT > 150) {
 				UT = UT - 40;
 				printf("score : %d ; unité de temps : %dms\n", variables.score, UT);
-				if (UT < 101) {
+				if (UT < 151) {
 					printf("\n///////////////////////////////\n//      VITESSE MAX !!!      //\n///////////////////////////////\n\n");
 				}
 			}
 		}
 
                 rafraichir(ecran, corps, leserpent, pomme, lepois, &lescore, variables.score);
+                raf++;
+                printf("raf %d\n", raf);
                 
 tempsPrecedent = tempsActuel;
 dir = leserpent->direction;

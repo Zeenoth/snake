@@ -38,6 +38,7 @@ typedef struct {
 	int mange;		//indique s'il a mangé le pois
 	int flag;		//s'il a mangé le pois, on met un flag pour s'en souvenir au prochain tour de boucle
 	int cogne;		//indique s'il s'est pris un mur
+	int mode;		//donne le mode de jeu
 } VARIABLES;
 
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables, TEXTE lescore);

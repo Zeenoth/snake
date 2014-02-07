@@ -78,6 +78,9 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
 TEXTE positionner_texte(TEXTE montexte, int x, int y);
 
+//pareil que creer_texte, mais avec une moins bonne qualité : temps de calcul plus court. On s'en sert pour le score
+TEXTE creer_texte_rapide(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
+
 //fonction qui gère le choix du mode par le joueur : renvoie le mode sélectionné
 int choisir_mode(int lechoix, SDL_Surface* ecran, TEXTE curseur, TEXTE* modes);
 
