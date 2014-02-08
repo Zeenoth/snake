@@ -161,7 +161,9 @@ info = positionner_texte(info, N*SIZE/2 - info.surface->w/2, N*SIZE*4/5);
 TEXTE lescore;
 char score_courant[30];
 snprintf(score_courant, 30, "Score : %d", var.score);
-lescore = creer_texte(lescore, "data/moonflowerbold.ttf", 24, score_courant, noir);
+char* police_score = NULL;
+police_score = "/home/sophie/Bureau/snake/data/moonflowerbold.ttf";
+lescore = creer_texte(lescore, police_score, 24, score_courant, noir);
 lescore = positionner_texte(lescore, floor(N*SIZE - lescore.surface->w), 0);
 
 printf("\nFIN DE L'INITIALISATION\n\n");

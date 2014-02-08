@@ -257,11 +257,31 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 
 TEXTE creer_texte(TEXTE montexte, char* mapolice, int taille, char* message, SDL_Color couleur) {
 	//printf("entrée dans creer_texte\n");
-	montexte.font = TTF_OpenFont(mapolice, taille);
-	if (montexte.font == NULL) {
-		printf("%s\n", TTF_GetError());
-		//creer_texte(montexte, "data/ubuntu.ttf", taille, message, couleur);
-		//exit(0);
+	if (strcmp(mapolice, "/home/sophie/Bureau/snake/data/moonflowerbold.ttf") == 0) {
+		printf("ici\n");
+		static TTF_Font* scoreFont = NULL;
+		
+		if (!scoreFont) {
+			char* temp = "/home/sophie/Bureau/snake/data/moonflowerbold.ttf";
+			printf("là\n");
+				if (!temp) {
+					printf("erreur lors de la copie\n");
+				}
+			scoreFont = TTF_OpenFont(temp, taille);
+				if (!scoreFont) {
+					printf("%s\n", TTF_GetError());
+				}
+			montexte.font = scoreFont;
+		}
+	}
+
+	else {
+		montexte.font = TTF_OpenFont(mapolice, taille);
+		if (montexte.font == NULL) {
+			printf("%s\n", TTF_GetError());
+			//creer_texte(montexte, "data/ubuntu.ttf", taille, message, couleur);
+			//exit(0);
+		}
 	}
 	
 	montexte.color = couleur;
@@ -275,7 +295,6 @@ TEXTE creer_texte_rapide(TEXTE montexte,char* mapolice, int taille, char* messag
 	montexte.font = TTF_OpenFont(mapolice, taille);
 	if (montexte.font == NULL) {
 		printf("%s\n", TTF_GetError());
-		//exit(0);
 	}
 	
 	montexte.color = couleur;
