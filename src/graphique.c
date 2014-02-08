@@ -25,6 +25,9 @@ BOUTONS placer1bouton(SDL_Surface* ecran, BOUTONS lebouton) {
 	lebouton.pos_1.y = N*SIZE - 1.2*lebouton.bouton1->h;
 	SDL_BlitSurface(lebouton.bouton1, NULL, ecran, &(lebouton.pos_1));
 
+	lebouton.bouton2 = NULL;
+	lebouton.bouton3 = NULL;
+
 	SDL_Flip(ecran);
 
 	return lebouton;

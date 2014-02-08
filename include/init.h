@@ -38,6 +38,4 @@ SCORE* init_scores(void);
 
 
 
-
-
 #endif
