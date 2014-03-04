@@ -18,6 +18,7 @@
 #include "global.h"
 #include "controle.h"
 #include "fichier.h"
+#include "graphique.h"
 
 #ifndef _TEXTE_
 #define _TEXTE_
@@ -45,8 +46,6 @@ int cogne_mur2(SERPENT s, int H, int W);
 
 //affiche les coordonnées du pois
 void visualiser_pois(POIS p);
-
-#include "graphique.h"
 
 //fonction qui fait grandir le serpent. Elle ajoute un maillon en tête suivant la direction dans laquelle avance le serpent et fait n++
 SERPENT grandit(SERPENT s);
@@ -77,9 +76,6 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 //x et y sont l'abscisse et l'ordonnée du coin supérieur gauche de l'étiquette contenant le texte.
 TEXTE creer_texte(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
 TEXTE positionner_texte(TEXTE montexte, int x, int y);
-
-//pareil que creer_texte, mais avec une moins bonne qualité : temps de calcul plus court. On s'en sert pour le score
-TEXTE creer_texte_rapide(TEXTE montexte,char* mapolice, int taille, char* message, SDL_Color couleur);
 
 //fonction qui gère le choix du mode par le joueur : renvoie le mode sélectionné
 int choisir_mode(int lechoix, SDL_Surface* ecran, TEXTE curseur, TEXTE* modes);

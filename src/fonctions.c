@@ -53,6 +53,7 @@ int cogne_mur(SERPENT s, int H, int W) {
 }
 
 int cogne_mur2(SERPENT s, int H, int W) {
+	//printf("entree dans cogne 2\n");
 	if (s->coord.abscisse < 0) {
 		s->coord.abscisse = N-1;
 	}
@@ -258,12 +259,10 @@ void rafraichir(SDL_Surface* ecran, SDL_Surface* tete, SERPENT s, SDL_Surface* p
 TEXTE creer_texte(TEXTE montexte, char* mapolice, int taille, char* message, SDL_Color couleur) {
 	//printf("entrée dans creer_texte\n");
 	if (strcmp(mapolice, "/home/sophie/Bureau/snake/data/moonflowerbold.ttf") == 0) {
-		printf("ici\n");
 		static TTF_Font* scoreFont = NULL;
 		
 		if (!scoreFont) {
 			char* temp = "/home/sophie/Bureau/snake/data/moonflowerbold.ttf";
-			printf("là\n");
 				if (!temp) {
 					printf("erreur lors de la copie\n");
 				}
@@ -296,10 +295,11 @@ TEXTE creer_texte_rapide(TEXTE montexte,char* mapolice, int taille, char* messag
 	montexte.font = TTF_OpenFont(mapolice, taille);
 	if (montexte.font == NULL) {
 		printf("%s\n", TTF_GetError());
+		exit(0);
 	}
 	
 	montexte.color = couleur;
-	montexte.surface = TTF_RenderText_Solid(montexte.font, message, montexte.color);
+	montexte.surface = TTF_RenderText_Blended(montexte.font, message, montexte.color);
 	
 	return montexte;
 }
@@ -339,6 +339,7 @@ int choisir_mode(int lechoix, SDL_Surface* ecran, TEXTE curseur, TEXTE* modes) {
 	int jaichoisi = 0;
 
 	while (jaichoisi == 0) {
+		SDL_Flip(ecran);
 		lechoix = clique_menu(&jaichoisi, lechoix);
 		printf("numero %d \n",lechoix);
 	
@@ -354,7 +355,6 @@ int choisir_mode(int lechoix, SDL_Surface* ecran, TEXTE curseur, TEXTE* modes) {
 			}		
 			SDL_BlitSurface(modes[i].surface, NULL, ecran, &(modes[i].pos));
 		}
-		SDL_Flip(ecran);
 		if (jaichoisi == -14) {
 			//goto quitter_programme;
 			return -14;

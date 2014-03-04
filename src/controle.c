@@ -1,14 +1,14 @@
 #include "../include/controle.h"
 
 VARIABLES controle(SDL_Surface* ecran, SERPENT leserpent, POIS lepois, SDL_Surface* corps, SDL_Surface* pomme, VARIABLES variables, TEXTE lescore) {
-int raf = 0; //compte combien de fois on rafraîchit l'écran avant que ça plante
+
         SDL_Event event;
         int tempsPrecedent = 0;
         int tempsActuel = 0;
         int retour = 0; //drapeau pour éviter que deux appuis différents sur des flèches pendant la même UT ne fassent perdre
 	DIRECTION dir = leserpent->direction;
         
-	//fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
+	fprintf(stdout, "\nAppuie sur une touche pour commencer la partie\n");
 	//on décide d'ignorer les mouvements de souris et les relâchements de touches du clavier
 	SDL_EventState(SDL_KEYUP, SDL_IGNORE);
 	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
@@ -127,13 +127,12 @@ if (tempsActuel - tempsPrecedent > UT) {
 		}
 
                 rafraichir(ecran, corps, leserpent, pomme, lepois, &lescore, variables.score);
-                raf++;
-                printf("raf %d\n", raf);
                 
 tempsPrecedent = tempsActuel;
 dir = leserpent->direction;
 }
 else {
+	retour = 0;
 }
 
         } //fin du while

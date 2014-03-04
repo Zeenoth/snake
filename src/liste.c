@@ -92,17 +92,28 @@ Liste supprimer_tete(Liste l) {
 
 Liste supprime_tout(Liste l) {
 	printf("entrée dans supprime_tout\n");
+	printf("%d\n", est_vide(l));
+
+	if (est_vide(l) != 0) {
+		printf("liste vide\n");
+		return l;
+	}
+	
 	if (est_vide(l)==0)
 	{	if (l->suiv == NULL) {
 			printf("un seul élément dans la liste\n");
 			l=supprimer_tete(l);
 		}
 
-		while (est_vide(l)==0) {
+		while (est_vide(l->suiv)==0) {
+			printf(" on est dans le while\n");
 			l=supprimer_tete(l);
 			l=l->suiv;
 		}
-	}	
+	}
+	printf("après le while %d\n", est_vide(l));
+	l = supprimer_tete(l);
+	printf("après le coup fatal %d\n", est_vide(l));
 	return l;
 
 }
